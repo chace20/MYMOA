@@ -1,13 +1,21 @@
-#MYMOAÏîÄ¿#
+#MYMOAé¡¹ç›®#
 
 ##Build##
 
 Android SDK Tools >= 24.3.3
+
 Android SDK Platform-tools >= 22
+
 Build Tools >= 22.0.1
+
 Android Studio >= 1.2.2
 
-##Ïà¹ØÎÄµµ##
-  * [ÃüÃû¹æ·¶](doc/NamingConventions.md)
-##Êı¾İ¿â²Ù×÷ÃüÁî##
-  * [Êı¾İ¿â²Ù×÷ÃüÁî](doc/DatabaseCMD.md)
+##ç›¸å…³æ–‡æ¡£##
+
+###å‘½åè§„èŒƒ###
+
+  * [å‘½åè§„èŒƒ](doc/NamingConventions.md)
+  
+##æ•°æ®åº“æ“ä½œå‘½ä»¤##
+
+  * [æ•°æ®åº“æ“ä½œå‘½ä»¤](doc/DatabaseCMD.md)

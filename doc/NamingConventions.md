@@ -1,20 +1,20 @@
-#HeartBeatÃüÃû¹æ·¶
+#å‘½åè§„èŒƒ
 ##1.res
 ###layout
 - Activity
-layout_ActivityµÄÃû×Ö_×´Ì¬
+layout_Activityçš„åå­—_çŠ¶æ€
 EX:layout_main_loading,layout_put_content,layout_about.
 
-- AdapterViewµÄÃ¿Ò»Ïî
-item_Ãû×Ö
+- AdapterViewçš„æ¯ä¸€é¡¹
+item_åå­—
 EX:item_wifi,item_put.
 
 - Dialog
-dialog_Ãû×Ö
+dialog_åå­—
 EX:dialog_loading
 
-###ViewµÄID
-Ãû×Ö(Ğ¡Ğ´)+ViewµÄµÚÒ»¸öµ¥´Ê
+###Viewçš„ID
+åå­—(å°å†™)+Viewçš„ç¬¬ä¸€ä¸ªå•è¯
 
 - ProgressBar
 EX:loadingProgress
@@ -28,27 +28,27 @@ EX:loadingList
 - Button
 EX:retryButton
 
-###ValueµÄString
-ActivityÃû×Ö_GroupÃû×Ö_¾ßÌåÃû×Ö
+###Valueçš„String
+Activityåå­—_Groupåå­—_å…·ä½“åå­—
 EX:main_menu_gifts,main_loading,app_name.
 
 ###menu
-- ÎÄ¼şÃû£ºActivityÃû×Ö_·ÖÖ§
+- æ–‡ä»¶åï¼šActivityåå­—_åˆ†æ”¯
 EX:main.xml
 
-- ²Ëµ¥ÏîitemµÄID£ºmenu_¾ßÌåÃû×Ö
+- èœå•é¡¹itemçš„IDï¼šmenu_å…·ä½“åå­—
 EX:menu_gifts
 
 ###drawable
-**Ç°×º_ActivityÃû×Ö_ÓÃÍ¾_×´Ì¬**
+**å‰ç¼€_Activityåå­—_ç”¨é€”_çŠ¶æ€**
 
-- Í¼±ê£ºic_
+- å›¾æ ‡ï¼šic_
 EX:ic_main_retry_normal,ic_main_wifi,ic_main_menu_gifts_new.
 
-- ±³¾°Í¼:bg_
+- èƒŒæ™¯å›¾:bg_
 EX:bg_about_head
 
-- Ñ¡ÔñÆ÷£ºselector_
+- é€‰æ‹©å™¨ï¼šselector_
 EX:selector_put_outputbutton
 ##2.src
 

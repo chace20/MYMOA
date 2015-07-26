@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    <color name="whiteDark">#e0e0e0</color>
+    <!-- 主颜色 -->
+    <color name="colorPrimary">#71c7d4</color>
+    <color name="colorPrimaryDark">#ff4d94d4</color>
+    <!-- 强调色 -->
+    <color name="colorAccent">#eded7a9b</color>
+    <color name="colorAccentDark">#eded53ba</color>
+    <!-- 文字 -->
+    <color name="text_black_87">#DE000000</color>
+    <color name="text_black_54">#8a000000</color>
+    <color name="text_white_87">#deffffff</color>
+    <color name="text_white_54">#8affffff</color>
+</resources>

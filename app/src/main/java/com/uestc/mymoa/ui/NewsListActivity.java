@@ -16,7 +16,7 @@ import java.util.HashMap;
 /**
  * Created by DBJ_MAC on 2015/7/27.
  */
-public class NewsTypeActivity extends BaseActivity {
+public class NewsListActivity extends BaseActivity {
     @Override
     protected void initLayout() {
         Button btn=(Button)this.findViewById(R.id.backButton);

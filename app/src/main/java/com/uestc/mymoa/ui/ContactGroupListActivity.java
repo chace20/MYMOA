@@ -15,7 +15,7 @@ import java.util.HashMap;
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class MyGroupActivity extends Activity {
+public class ContactGroupListActivity extends Activity {
 
     private ListView groupList;
     private ArrayList<HashMap<String, Object>> list;
@@ -24,7 +24,7 @@ public class MyGroupActivity extends Activity {
         //TODO
     }
     private void refreshAdapter(){
-        groupList.setAdapter(new SimpleAdapter(MyGroupActivity.this,
+        groupList.setAdapter(new SimpleAdapter(ContactGroupListActivity.this,
                 list, R.layout.item_contact,
                 new String[]{"groupname"}, new int[]{R.id.itemText}));
     }
@@ -40,8 +40,8 @@ public class MyGroupActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent = new Intent(MyGroupActivity.this,
-                        GroupDetailActivity.class);
+                Intent intent = new Intent(ContactGroupListActivity.this,
+                        ContactGroupDetailActivity.class);
 
                 intent.putExtra("groupid", (Integer) list.get(position)
                         .get("groupid"));

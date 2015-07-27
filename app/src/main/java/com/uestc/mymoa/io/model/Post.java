@@ -1,9 +1,9 @@
-package com.uestc.mymoa;
+package com.uestc.mymoa.io.model;
 
 /**
  * Created by HeGang on 2015/7/27.
  */
-public class Affiche {
+public class Post {
     public String title;
     public String article;
     public String start_date;

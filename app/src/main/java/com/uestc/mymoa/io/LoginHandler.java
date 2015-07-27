@@ -1,7 +1,5 @@
 package com.uestc.mymoa.io;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -10,14 +8,14 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.uestc.mymoa.constant.Api;
-import com.uestc.mymoa.io.model.PostReqStatus;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 /**
  * Created by chao on 2015/7/27.
  */
 public class LoginHandler extends IOHandler {
 
-    protected IOCallback<PostReqStatus> callback;
+    protected IOCallback<RequestStatus> callback;
 
     public void process(RequestParams params, IOCallback ioCallback) {
         this.callback = ioCallback;
@@ -41,7 +39,7 @@ public class LoginHandler extends IOHandler {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         Gson gson = new Gson();
-                        PostReqStatus status = gson.fromJson(responseInfo.result, PostReqStatus.class);
+                        RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);
                         callback.onSuccess(status);
                     }
 

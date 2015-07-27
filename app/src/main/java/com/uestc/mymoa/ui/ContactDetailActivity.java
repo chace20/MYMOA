@@ -61,7 +61,7 @@ public class ContactDetailActivity extends Activity {
     protected void onResume() {
         HashMap<String, Object> map = new HashMap<String, Object>();
         map = getData();
-        if((int)(map.get("uid")) != -1){
+        if(Integer.parseInt(map.get("uid").toString()) != -1){
             nameText.setText(map.get("uname").toString());
             phonenumText.setText(map.get("phonenum").toString());
         }

@@ -13,7 +13,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initLayout() {
-        
     }
 
     @Override

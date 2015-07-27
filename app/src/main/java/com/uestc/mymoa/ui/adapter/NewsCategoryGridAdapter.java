@@ -1,15 +1,16 @@
-package com.uestc.mymoa;
+package com.uestc.mymoa.ui.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.uestc.mymoa.R;
+import com.uestc.mymoa.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,8 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
         newsCategoryText.setText(list.get(position));
 
         AdapterView.LayoutParams params = new AdapterView.LayoutParams(
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels-4*3)/3,
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels-4*3)/3);
+                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3,
+                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
         convertView.setLayoutParams(params);
         return convertView;

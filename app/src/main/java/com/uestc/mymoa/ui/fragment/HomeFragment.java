@@ -1,16 +1,20 @@
-package com.uestc.mymoa;
+package com.uestc.mymoa.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.uestc.mymoa.ParentLayoutOfChildViewPager;
+import com.uestc.mymoa.R;
+import com.uestc.mymoa.ui.adapter.NewsCategoryGridAdapter;
+import com.uestc.mymoa.ui.adapter.PostAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,13 +98,11 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        Log.i("run","---------------------");
-
         timer.schedule(timerTask,0,2000);
     }
 
     private void initView() {
-        listImage.get(0).setBackgroundColor(getResources().getColor(R.color.cyan_500));
+        listImage.get(0).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
     }
 
     private void initListener() {
@@ -114,7 +116,7 @@ public class HomeFragment extends Fragment {
                 for (int i = 0; i < 4; i++) {
                     listImage.get(i).setBackgroundColor(getActivity().getResources().getColor(R.color.white));
                 }
-                listImage.get(position).setBackgroundColor(getActivity().getResources().getColor(R.color.cyan_500));
+                listImage.get(position).setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimary));
             }
 
             @Override

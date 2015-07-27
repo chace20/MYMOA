@@ -26,33 +26,33 @@ public class NewsTypeActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        //ĞèÒª°ó¶¨µÄÊı¾İ
-        //Ã¿Ò»ĞĞµÄ²¼¾Ö//¶¯Ì¬Êı×éÖĞµÄÊı¾İÔ´µÄ¼ü¶ÔÓ¦µ½¶¨Òå²¼¾ÖµÄViewÖĞnew
+        //éœ€è¦ç»‘å®šçš„æ•°æ®
+        //æ¯ä¸€è¡Œçš„å¸ƒå±€//åŠ¨æ€æ•°ç»„ä¸­çš„æ•°æ®æºçš„é”®å¯¹åº”åˆ°å®šä¹‰å¸ƒå±€çš„Viewä¸­new
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String,Object>>();
         ListView lv=(ListView)this.findViewById(R.id.newsList);
         SimpleAdapter mSimpleAdapter = new SimpleAdapter
                 (this,listItem, R.layout.layout_item, new String[] {"titleText01","managerText01", "dateText01","item_Image"},
         new int[] {R.id.titleText01,R.id.managerText01,R.id.dateText01,R.id.item_Image});
-    lv.setAdapter(mSimpleAdapter);//ÎªListView°ó¶¨ÊÊÅäÆ÷
+    lv.setAdapter(mSimpleAdapter);//ä¸ºListViewç»‘å®šé€‚é…å™¨
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
         long arg3) {
-            setTitle("Äãµã»÷ÁËµÚ"+arg2+"ĞĞ");//ÉèÖÃ±êÌâÀ¸ÏÔÊ¾µã»÷µÄĞĞ
+            setTitle("ä½ ç‚¹å‡»äº†ç¬¬"+arg2+"è¡Œ");//è®¾ç½®æ ‡é¢˜æ æ˜¾ç¤ºç‚¹å‡»çš„è¡Œ
         }
     });
     }
 
     @Override
     protected void initValue() {
-        /*ÔÚÊı×éÖĞ´æ·ÅÊı¾İ*/
+        /*åœ¨æ•°ç»„ä¸­å­˜æ”¾æ•°æ®*/
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String,Object>>();
         for(int i=0;i<10;i++)
         {
             HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("titleText01", "µÚ"+i+"ĞĞ");
-            map.put("item_Image", R.mipmap.ic_launcher);//¼ÓÈëÍ¼Æ¬
-            map.put("managerText01","ÕÅÈı");
+            map.put("titleText01", "ç¬¬"+i+"è¡Œ");
+            map.put("item_Image", R.mipmap.ic_launcher);//åŠ å…¥å›¾ç‰‡
+            map.put("managerText01","å¼ ä¸‰");
             map.put("dateText", "2015-07-28 16:13:25");
             listItem.add(map);
         }

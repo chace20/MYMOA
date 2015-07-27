@@ -1,18 +1,14 @@
 package com.uestc.mymoa.ui;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.BaseAdapter;
-
 import com.uestc.mymoa.R;
 
-
-public class MainActivity extends BaseActivity {
-
+/**
+ * Created by chao on 2015/7/27.
+ */
+public class SigninActivity extends BaseActivity {
     @Override
     protected void initLayout() {
+
     }
 
     @Override
@@ -27,6 +23,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int setRootView() {
-        return R.layout.layout_main_base;
+        return R.layout.layout_signin;
     }
 }

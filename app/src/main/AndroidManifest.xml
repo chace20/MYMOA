@@ -19,6 +19,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        //hhb文档管理
+        <activity android:name=".ui.FileManageActivity"
+            android:label="文档列表">
+        </activity>
+        <activity android:name=".ui.FileManageAddActivity"
+            android:label="新建文档">
+        </activity>
+        <activity android:name=".ui.FileManageDetailActivity"
+            android:label="文档详情">
+        </activity>
+        <activity android:name=".ui.FileManageSearchActivity"
+            android:label="文档搜索">
+        </activity>
+        <activity android:name=".ui.FileManageEditActivity"
+            android:label="编辑文档">
+        </activity>
+        //hhb
     </application>
 
 </manifest>

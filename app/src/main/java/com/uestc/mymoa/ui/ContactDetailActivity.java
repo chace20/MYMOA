@@ -44,15 +44,15 @@ public class ContactDetailActivity extends Activity {
             public void onClick(View v) {
 
                 new AlertDialog.Builder(ContactDetailActivity.this)
-                        .setTitle("É¾³ıÁªÏµÈË")
-                        .setMessage("È·¶¨ÒªÉ¾³ı¸ÃÁªÏµÈËÂğ£¿")
-                        .setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+                        .setTitle("åˆ é™¤è”ç³»äºº")
+                        .setMessage("ç¡®å®šè¦åˆ é™¤è¯¥è”ç³»äººå—ï¼Ÿ")
+                        .setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //TODO
                             }
                         })
-                        .setNegativeButton("È¡Ïû", null)
+                        .setNegativeButton("å–æ¶ˆ", null)
                         .show();
             }
         });

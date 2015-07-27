@@ -12,15 +12,21 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="手机号"
+            android:id="@+id/phoneEdit"
             android:layout_marginBottom="32dp"/>
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/passEdit"
+            android:hint="密码"/>
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:id="@+id/loginButton"
+        android:text="登录"/>
 
 </RelativeLayout>

@@ -1,9 +1,6 @@
 package com.uestc.mymoa.ui;
 
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,14 +11,14 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.uestc.mymoa.R;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.LoginHandler;
-import com.uestc.mymoa.io.model.PostReqStatus;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.List;
 
 /**
  * Created by chao on 2015/7/27.
  */
-public class LoginActivity extends BaseActivity{
+public class UserLoginActivity extends BaseActivity{
 
     @ViewInject(R.id.phoneEdit)
     private EditText phoneEdit;
@@ -61,29 +58,29 @@ public class LoginActivity extends BaseActivity{
         params.addQueryStringParameter("phone", phone);
         params.addQueryStringParameter("password",pass);
 
-        new LoginHandler().process(params, new IOCallback<PostReqStatus>() {
+        new LoginHandler().process(params, new IOCallback<RequestStatus>() {
             @Override
             public void onStart() {
-                Toast.makeText(LoginActivity.this,"start",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserLoginActivity.this,"start",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onSuccess(List<PostReqStatus> result) {
+            public void onSuccess(List<RequestStatus> result) {
 
             }
 
             @Override
-            public void onSuccess(PostReqStatus result) {
+            public void onSuccess(RequestStatus result) {
                 if(result.code==200){
-                    Toast.makeText(LoginActivity.this,"success",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserLoginActivity.this,"success",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(LoginActivity.this,"password or phone error",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserLoginActivity.this,"password or phone error",Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(String error) {
-                Toast.makeText(LoginActivity.this,"internet error",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserLoginActivity.this,"internet error",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -4,8 +4,9 @@ import com.uestc.mymoa.R;
 
 /**
  * Created by chao on 2015/7/27.
+ * 进去第一个页面选择登录还是注册
  */
-public class SigninActivity extends BaseActivity {
+public class UserSelectActivity extends BaseActivity {
     @Override
     protected void initLayout() {
 
@@ -23,6 +24,6 @@ public class SigninActivity extends BaseActivity {
 
     @Override
     protected int setRootView() {
-        return R.layout.layout_signin;
+        return R.layout.layout_select;
     }
 }

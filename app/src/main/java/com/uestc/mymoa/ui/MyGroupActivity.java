@@ -1,6 +1,8 @@
 package com.uestc.mymoa.ui;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,7 +15,7 @@ import java.util.HashMap;
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class MyGroupActivity extends BaseActivity{
+public class MyGroupActivity extends Activity {
 
     private ListView groupList;
     private ArrayList<HashMap<String, Object>> list;
@@ -26,15 +28,14 @@ public class MyGroupActivity extends BaseActivity{
                 list, R.layout.item_contact,
                 new String[]{"groupname"}, new int[]{R.id.itemText}));
     }
+
     @Override
-    protected void initLayout() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.layout_mygroup);
         groupList = (ListView) findViewById(R.id.groupList);
-    }
 
-
-    @Override
-    protected void initListener() {
         groupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -48,17 +49,6 @@ public class MyGroupActivity extends BaseActivity{
             }
         });
     }
-
-    @Override
-    protected void initValue() {
-
-    }
-
-    @Override
-    protected int setRootView() {
-        return 0;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();

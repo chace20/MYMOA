@@ -1,6 +1,10 @@
 package com.uestc.mymoa.ui;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +16,7 @@ import java.util.HashMap;
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class ContactDetailActivity extends BaseActivity{
+public class ContactDetailActivity extends Activity {
 
     private TextView nameText;
     private TextView phonenumText;
@@ -26,40 +30,35 @@ public class ContactDetailActivity extends BaseActivity{
         uid = intent.getIntExtra("uid", -1);
         return map;
     }
+
     @Override
-    protected void initLayout() {
+    protected void onCreate(Bundle savedInstanceState) {
 
         setContentView(R.layout.layout_contactdetail);
         nameText = (TextView) findViewById(R.id.nameText);
         phonenumText = (TextView) findViewById(R.id.phonenumText);
         delcontactButton = (Button) findViewById(R.id.delcontactButton);
 
-    }
-
-    @Override
-    protected void initListener() {
         delcontactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+                new AlertDialog.Builder(ContactDetailActivity.this)
+                        .setTitle("删除联系人")
+                        .setMessage("确定要删除该联系人吗？")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
             }
         });
     }
-
-    @Override
-    protected void initValue() {
-
-    }
-
-    @Override
-    protected int setRootView() {
-        return 0;
-    }
-
     @Override
     protected void onResume() {
-        super.onResume();
         HashMap<String, Object> map = new HashMap<String, Object>();
         map = getData();
         if(map.get("uid") != -1){

@@ -3,5 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="more">more</string>
+=======
+    <string name="delcontactButton">删除联系人</string>
+>>>>>>> 0573bf6d7173ce586f41c1e317ba426733b5622a
 </resources>

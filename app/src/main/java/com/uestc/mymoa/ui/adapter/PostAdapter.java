@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.uestc.mymoa.R;
 
@@ -66,9 +67,13 @@ public class PostAdapter extends PagerAdapter {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         View convertView = inflater.inflate(R.layout.item_post, null);
-        ImageView postImage = (ImageView) convertView.findViewById(R.id.postImage);
 
-        postImage.setBackgroundResource((Integer)( list.get(position).get("imageResId")));
+        TextView titleText = (TextView) convertView.findViewById(R.id.titleText);
+        TextView authorText = (TextView) convertView.findViewById(R.id.authorText);
+
+        Map<String,Object> map =list.get(position);
+        titleText.setText(map.get("title").toString());
+        authorText.setText(map.get("uname").toString());
 
         container.addView(convertView);
         views.add(convertView);
@@ -80,6 +85,5 @@ public class PostAdapter extends PagerAdapter {
                             Object object) {
         container.removeView(views.get(position));
     }
-
 
 }

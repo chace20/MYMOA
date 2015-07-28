@@ -14,15 +14,22 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.ParentLayoutOfChildViewPager;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.PostQueryPostListHandler;
+import com.uestc.mymoa.io.model.PostContent;
+import com.uestc.mymoa.io.model.RequestStatus;
 import com.uestc.mymoa.ui.NewsListActivity;
 import com.uestc.mymoa.ui.adapter.NewsCategoryGridAdapter;
 import com.uestc.mymoa.ui.adapter.PostAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +37,7 @@ import java.util.TimerTask;
  * Created by nothisboy on 2015/7/26.
  */
 public class HomeFragment extends Fragment {
+    private PostQueryPostListHandler handler;
 
     private Context context;
 
@@ -60,6 +68,8 @@ public class HomeFragment extends Fragment {
 
     private boolean isTimerRunning = false;
 
+    private List<Map<String, Object>> list = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.layout_main_home_fragment, null);
@@ -85,10 +95,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void initValues() {
+        handler = new PostQueryPostListHandler();
+
         newsCategoryGridAdapter = new NewsCategoryGridAdapter(getActivity());
         newsCategoryGrid.setAdapter(newsCategoryGridAdapter);
 
-        postAdapter = new PostAdapter(getActivity());
+        postAdapter = new PostAdapter(getActivity(),list);
         postViewPager.setAdapter(postAdapter);
 
         parentOfViewPagerLinear.setChildViewPager(postViewPager);
@@ -161,4 +173,31 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+
+    private void getPostList(){
+        handler.process(null, new IOCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(List result) {
+                list = result;
+                postAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                if(((RequestStatus)result).code==1){
+                    Toast.makeText(HomeFragment.this.getActivity(), "获取出现未知错误", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(HomeFragment.this.getActivity(), "网络错误,请重试", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

@@ -21,5 +21,7 @@
     <color name="colorButtonSigninDark">#cc9dc92a</color>
     <color name="colorButtonLogin">#ffee783f</color>
     <color name="colorButtonLoginDark">#ccee783f</color>
+    
+    <color name="colorBgPost">#ff007bbb</color>
 
 </resources>

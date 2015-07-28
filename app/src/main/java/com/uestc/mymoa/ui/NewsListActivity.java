@@ -1,5 +1,6 @@
 package com.uestc.mymoa.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,10 +38,35 @@ public class NewsListActivity extends BaseActivity {
     lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-        long arg3) {
-            setTitle("你点击了第"+arg2+"行");//设置标题栏显示点击的行
+                                long arg3) {
+            setTitle("你点击了第" + arg2 + "行");//设置标题栏显示点击的行
         }
     });
+        Button btn=(Button)this.findViewById(R.id.backButton);
+        btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                setContentView(R.layout.layout_main_base) ;  //***为你想要转到的界面名
+            }
+        });
+        ListView list=new ListView(this);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=null ;
+                switch(position){
+                    case 0:
+                         intent=new Intent(NewsListActivity.this,NewsContentActivity.class);
+                        break;
+                    case 1:
+                        intent=null;
+                        break;
+                }
+                if(intent!=null){
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override

@@ -5,6 +5,9 @@
     <!-- 白色 -->
     <color name="white">#ffffff</color>
     <color name="whiteDark">#ccffffff</color>
+    <color name="whiteAlpha">#44ffffff</color>
+    <!-- 灰色 -->
+    <color name="greyAlpha">#a0a0a0</color>
     <!-- 主颜色 -->
     <color name="colorPrimary">#444</color>
     <color name="colorPrimaryDark">#000</color>

@@ -1,6 +1,5 @@
 package com.uestc.mymoa.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +15,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.lidroid.xutils.http.RequestParams;
-import com.uestc.mymoa.ParentLayoutOfChildViewPager;
+import com.uestc.mymoa.common.view.ParentLayoutOfChildViewPager;
 import com.uestc.mymoa.R;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.PostQueryPostListHandler;
-import com.uestc.mymoa.io.model.PostContent;
 import com.uestc.mymoa.io.model.RequestStatus;
 import com.uestc.mymoa.ui.NewsListActivity;
 import com.uestc.mymoa.ui.adapter.NewsCategoryGridAdapter;
@@ -57,6 +54,7 @@ public class HomeFragment extends Fragment {
     private ImageView indicatorImage2;
     private ImageView indicatorImage3;
     private ImageView indicatorImage4;
+    private ImageView indicatorImage5;
 
     private List<ImageView> listImage;
     private NewsCategoryGridAdapter newsCategoryGridAdapter;
@@ -92,6 +90,7 @@ public class HomeFragment extends Fragment {
         indicatorImage2 = (ImageView) view.findViewById(R.id.indicatorImage2);
         indicatorImage3 = (ImageView) view.findViewById(R.id.indicatorImage3);
         indicatorImage4 = (ImageView) view.findViewById(R.id.indicatorImage4);
+        indicatorImage5 = (ImageView) view.findViewById(R.id.indicatorImage5);
     }
 
     private void initValues() {
@@ -100,8 +99,6 @@ public class HomeFragment extends Fragment {
         newsCategoryGridAdapter = new NewsCategoryGridAdapter(getActivity());
         newsCategoryGrid.setAdapter(newsCategoryGridAdapter);
 
-        postAdapter = new PostAdapter(getActivity(),list);
-        postViewPager.setAdapter(postAdapter);
 
         parentOfViewPagerLinear.setChildViewPager(postViewPager);
 
@@ -110,13 +107,14 @@ public class HomeFragment extends Fragment {
         listImage.add(indicatorImage2);
         listImage.add(indicatorImage3);
         listImage.add(indicatorImage4);
+        listImage.add(indicatorImage5);
 
         timer = new Timer();
         timerTask = new TimerTask() {
             @Override
             public void run() {
                 currentPostId++;
-                if (currentPostId == 4) {
+                if (currentPostId == 5) {
                     currentPostId = 0;
                 }
                 postAutoChangeHandler.sendEmptyMessage(CHANGE_POST);
@@ -130,7 +128,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView() {
-        listImage.get(0).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        getPostList();
     }
 
     private void initListener() {
@@ -141,10 +139,10 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                for (int i = 0; i < 4; i++) {
-                    listImage.get(i).setBackgroundResource(R.color.white);
+                for (int i = 0; i < 5; i++) {
+                    listImage.get(i).setBackgroundResource(R.color.whiteAlpha);
                 }
-                listImage.get(position).setBackgroundResource(R.color.colorPrimary);
+                listImage.get(position).setBackgroundResource(R.color.whiteDark);
             }
 
             @Override
@@ -183,8 +181,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onSuccess(List result) {
-                list = result;
-                postAdapter.notifyDataSetChanged();
+                postAdapter = new PostAdapter(getActivity(),result);
+                postViewPager.setAdapter(postAdapter);
             }
 
             @Override

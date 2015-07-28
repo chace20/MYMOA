@@ -1,5 +1,7 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
@@ -44,7 +46,7 @@ public class PostQueryPostListHandler extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                String result = String.valueOf(responseInfo);
+                String result = String.valueOf(responseInfo.result);
                 if (result.indexOf("[") != -1) {
                     Type listType = new TypeToken<List<HashMap<String, Object>>>() {
                     }.getType();

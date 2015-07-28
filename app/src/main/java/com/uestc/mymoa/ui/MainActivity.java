@@ -23,13 +23,9 @@ import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
-<<<<<<< HEAD
-import com.uestc.mymoa.SelectActivity;
-import com.uestc.mymoa.constant.BroadCastAction;
-=======
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.constant.BroadCastAction;
 import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
->>>>>>> 5c247a07e8927bfbb12573699f8cb07375921b65
 import com.uestc.mymoa.ui.fragment.ContactFragment;
 import com.uestc.mymoa.ui.fragment.HomeFragment;
 import com.uestc.mymoa.ui.fragment.ManageFragment;
@@ -167,7 +163,6 @@ public class MainActivity extends BaseActivity {
 
         viewpager.setAdapter(fragmentPagerAdapter);
 
-        toolbar.setTitle("Main");
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

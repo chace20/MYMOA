@@ -73,7 +73,7 @@ public class PostAdapter extends PagerAdapter {
 
         Map<String,Object> map =list.get(position);
         titleText.setText(map.get("title").toString());
-        authorText.setText(map.get("uname").toString());
+        authorText.setText("—— "+map.get("uname").toString());
 
         container.addView(convertView);
         views.add(convertView);

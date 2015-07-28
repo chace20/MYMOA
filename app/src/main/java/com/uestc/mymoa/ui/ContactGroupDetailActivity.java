@@ -21,6 +21,7 @@ import com.uestc.mymoa.io.ContactHandler;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.model.RequestStatus;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class ContactGroupDetailActivity extends Activity {
+public class ContactGroupDetailActivity extends BaseActivity {
 
     private ListView groupdetailList;
     private List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
@@ -52,7 +53,6 @@ public class ContactGroupDetailActivity extends Activity {
 
                 list = result;
                 refreshAdapter();
-
             }
 
             @Override
@@ -72,7 +72,7 @@ public class ContactGroupDetailActivity extends Activity {
         RequestParams params = new RequestParams();
 
         params.addBodyParameter("uid", uid);
-        params.addBodyParameter("groupid",groupid);
+        params.addBodyParameter("groupid", groupid);
 
         new ContactHandler().addGroupContact(params, new IOCallback<RequestStatus>() {
             @Override
@@ -112,10 +112,7 @@ public class ContactGroupDetailActivity extends Activity {
 
         Intent intent = getIntent();
         groupid = intent.getStringExtra("groupid");
-        Log.e("null", "groupid1:" + groupid);
-        setContentView(R.layout.layout_groupdetail);
         groupdetailList = (ListView) findViewById(R.id.groupdetailList);
-        Log.e("null", "oncreate");
 
         groupdetailList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -125,11 +122,43 @@ public class ContactGroupDetailActivity extends Activity {
                         ContactDetailActivity.class);
 
                 intent.putExtra("uid", list.get(position).get("uid").toString());
-                startActivity(intent);
+                startActivityForResult (intent, 1);
             }
         });
+        list.clear();
         getGroupDetailList();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == 2){
+            list.clear();
+            getGroupDetailList();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void initLayout() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initValue() {
+
+    }
+
+    @Override
+    protected int setRootView() {
+        return R.layout.layout_groupdetail;
+    }
+
     @Override
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,20 +173,19 @@ public class ContactGroupDetailActivity extends Activity {
             addContactEdit.setHint("请输入联系人手机号");
 
             new  AlertDialog.Builder(ContactGroupDetailActivity.this)
-                    .setTitle("新建联系人群组")
-                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setTitle("新建群组联系人")
                     .setView(addContactEdit)
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
                             addGroupContact(addContactEdit.getText().toString());
+                            list.clear();
+                            getGroupDetailList();
                         }
                     })
                     .setNegativeButton("取消", null)
                     .show();
-            getGroupDetailList();
-            refreshAdapter();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class ContactDetailActivity extends Activity {
+public class ContactDetailActivity extends BaseActivity {
 
     private TextView nameText;
     private TextView phonenumText;
@@ -51,10 +51,8 @@ public class ContactDetailActivity extends Activity {
             @Override
             public void onSuccess(HashMap<String, Object> result) {
                 map = result;
-                Log.e("null", "map:" + map);
                 nameText.setText(map.get("uname").toString());
                 phonenumText.setText(map.get("uid").toString());
-
             }
 
             @Override
@@ -67,11 +65,12 @@ public class ContactDetailActivity extends Activity {
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("uid", String.valueOf(uid));
+        params.addBodyParameter("uid", uid);
 
         new ContactHandler().delContact(params, new IOCallback<RequestStatus>() {
             @Override
             public void onStart() {
+
             }
 
             @Override
@@ -103,8 +102,6 @@ public class ContactDetailActivity extends Activity {
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("uid");
-        Log.e("null", "uid:" + uid);
-        setContentView(R.layout.layout_contactdetail);
         nameText = (TextView) findViewById(R.id.nameText);
         phonenumText = (TextView) findViewById(R.id.phonenumText);
         delcontactButton = (Button) findViewById(R.id.delcontactButton);
@@ -120,6 +117,9 @@ public class ContactDetailActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 delContact();
+                                Intent intent = new Intent(ContactDetailActivity.this, ContactGroupDetailActivity.class);
+                                setResult(2, intent);
+                                finish();
                             }
                         })
                         .setNegativeButton("取消", null)
@@ -127,6 +127,26 @@ public class ContactDetailActivity extends Activity {
             }
         });
         getContactDetail();
+    }
+
+    @Override
+    protected void initLayout() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initValue() {
+
+    }
+
+    @Override
+    protected int setRootView() {
+        return R.layout.layout_contactdetail;
     }
 
 }

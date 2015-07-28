@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class ContactGroupListActivity extends Activity {
+public class ContactGroupListActivity extends BaseActivity {
 
     private ListView groupList;
     private List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
@@ -102,7 +102,6 @@ public class ContactGroupListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_mygroup);
         groupList = (ListView) findViewById(R.id.groupList);
 
         groupList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -118,7 +117,28 @@ public class ContactGroupListActivity extends Activity {
                 startActivity(intent);
             }
         });
+        list.clear();
         getGroupList();
+    }
+
+    @Override
+    protected void initLayout() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initValue() {
+
+    }
+
+    @Override
+    protected int setRootView() {
+        return R.layout.layout_mygroup;
     }
 
     @Override
@@ -141,6 +161,8 @@ public class ContactGroupListActivity extends Activity {
                         public void onClick(DialogInterface dialog, int which) {
 
                             addGroup(addGroupEdit.getText().toString());
+                            list.clear();
+                            getGroupList();
                         }
                     })
                     .setNegativeButton("取消", null)

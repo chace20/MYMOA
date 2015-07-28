@@ -133,7 +133,7 @@ public class ContactHandler extends IOHandler{
         final IOCallback<RequestStatus> callback = ioCallback;
 
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.GET,
+        http.send(HttpRequest.HttpMethod.POST,
                 Api.Contact.delContact,
                 params,
                 new RequestCallBack<String>() {
@@ -195,8 +195,6 @@ public class ContactHandler extends IOHandler{
                 });
     }
     public void addContact(RequestParams params, IOCallback ioCallback){
-
-
     }
     public void addGroupContact(RequestParams params, IOCallback ioCallback) {
 

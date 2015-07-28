@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,7 +57,7 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
         TextView newsCategoryText = (TextView) convertView.findViewById(R.id.newsCategoryText);
         newsCategoryText.setText(list.get(position));
 
-        AdapterView.LayoutParams params = new AdapterView.LayoutParams(
+        AbsListView.LayoutParams params = new GridView.LayoutParams(
                 (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3,
                 (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
@@ -65,10 +67,10 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
     private List<String> getListData() {
         List<String> list = new ArrayList<>();
-        list.add("本地");
-        list.add("娱乐");
-        list.add("科技");
-        list.add("亮黄色");
+        list.add("娱乐");//id -- 1
+        list.add("军事");//2
+        list.add("科技");//2
+        list.add("体育");//2
         return list;
     }
 }

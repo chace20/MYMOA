@@ -118,6 +118,7 @@ public class ContactDetailActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 delContact();
                                 Intent intent = new Intent(ContactDetailActivity.this, ContactGroupDetailActivity.class);
+                                intent.putExtra("uid", uid);
                                 setResult(2, intent);
                                 finish();
                             }

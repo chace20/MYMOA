@@ -1,7 +1,7 @@
 package com.uestc.mymoa.io;
 
-import android.widget.ListView;
-
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -9,13 +9,9 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.uestc.mymoa.constant.Api;
-import com.uestc.mymoa.io.model.DocContent;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -40,21 +36,13 @@ public class DocSearchDocHandler extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                try {
-                    List<DocContent> list = new ArrayList<DocContent>();
-                    JSONArray jsonArray = new JSONArray(responseInfo);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        DocContent docContent = new DocContent();
-                        docContent.docid = (String) jsonObject.get("docid");
-                        docContent.title = (String) jsonObject.get("title");
-                        list.add(docContent);
-                    }
-                    callback.onSuccess(list);
+                Type listType = new TypeToken<List<HashMap<String, Object>>>() {
+                }.getType();
+                Gson gson = new Gson();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                List<HashMap<String, Object>> list =
+                        gson.fromJson(responseInfo.result, listType);
+                callback.onSuccess(list);
             }
 
             @Override

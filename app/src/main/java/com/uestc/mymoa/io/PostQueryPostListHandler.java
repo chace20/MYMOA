@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by nothisboy on 2015/7/28.
  */
-public class PostQueryPostList extends IOHandler {
+public class PostQueryPostListHandler extends IOHandler {
 
     protected IOCallback callback;
 

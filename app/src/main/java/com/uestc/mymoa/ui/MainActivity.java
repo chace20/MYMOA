@@ -1,5 +1,8 @@
 package com.uestc.mymoa.ui;
 
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.uestc.mymoa.SelectActivity;
 import com.uestc.mymoa.ui.fragment.ContactFragment;
 import com.uestc.mymoa.ui.fragment.HomeFragment;
 import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
@@ -75,6 +79,8 @@ public class MainActivity extends BaseActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
+
+
     }
 
     @Override
@@ -163,7 +169,7 @@ public class MainActivity extends BaseActivity {
 
             operationMenu = new PopupWindow(view, getWindow().getDecorView().getWidth() / 3, ViewGroup.LayoutParams.WRAP_CONTENT);
             operationMenu.setAnimationStyle(R.style.popWindowAnimation);
-            operationMenu.showAsDropDown(toolbar, 0, 0, Gravity.RIGHT);
+            operationMenu.showAtLocation(toolbar, Gravity.RIGHT, 0, 0);
             isOperationMenuShowed = true;
 
 
@@ -178,18 +184,16 @@ public class MainActivity extends BaseActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
                         case 0:
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, PostAddActivity.class));
                             break;
                         case 1:
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
+                            startActivity(new Intent(MainActivity.this, MessageReleaseActivity.class));
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
-                            break;
-                        case 4:
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                     }
@@ -208,8 +212,7 @@ public class MainActivity extends BaseActivity {
 
         list.add("发布公告");
         list.add("发布新闻");
-        list.add("新建内部短信");
-        list.add("新建手机短信");
+        list.add("发送消息");
         list.add("新建联系人");
 
         for (int i = 0; i < list.size(); i++) {
@@ -224,16 +227,16 @@ public class MainActivity extends BaseActivity {
     private void setBottomTextColor(int previousPagerPosition, int currentPagerPosition) {
         switch (previousPagerPosition) {
             case CURRENT_IS_HOME:
-                homeText.setTextColor(getResources().getColor(R.color.white));
+                homeText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_MESSAGE:
-                messageText.setTextColor(getResources().getColor(R.color.white));
+                messageText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_CONTACT:
-                contactText.setTextColor(getResources().getColor(R.color.white));
+                contactText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_MANAGE:
-                manageText.setTextColor(getResources().getColor(R.color.white));
+                manageText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
         }
 

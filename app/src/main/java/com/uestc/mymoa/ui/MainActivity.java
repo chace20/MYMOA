@@ -173,7 +173,7 @@ public class MainActivity extends BaseActivity {
             Rect frame = new Rect();
             getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
             int statusBarHeight = frame.top;
-            operationMenu.showAtLocation(viewpager, Gravity.NO_GRAVITY, getWindow().getDecorView().getWidth(), toolbar.getHeight()+statusBarHeight);
+            operationMenu.showAtLocation(viewpager, Gravity.NO_GRAVITY, getWindow().getDecorView().getWidth(), toolbar.getHeight() + statusBarHeight);
 
             isOperationMenuShowed = true;
 

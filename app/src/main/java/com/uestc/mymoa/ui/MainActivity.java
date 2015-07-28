@@ -1,12 +1,7 @@
 package com.uestc.mymoa.ui;
 
-import com.uestc.mymoa.R;
-
-import android.media.Image;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -28,13 +23,17 @@ import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+<<<<<<< HEAD
 import com.uestc.mymoa.SelectActivity;
 import com.uestc.mymoa.constant.BroadCastAction;
+=======
+import com.uestc.mymoa.R;
+import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
+>>>>>>> 5c247a07e8927bfbb12573699f8cb07375921b65
 import com.uestc.mymoa.ui.fragment.ContactFragment;
 import com.uestc.mymoa.ui.fragment.HomeFragment;
-import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
 import com.uestc.mymoa.ui.fragment.ManageFragment;
-import com.uestc.mymoa.ui.fragment.MessageFragment;
+import com.uestc.mymoa.ui.fragment.MailFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,7 +96,6 @@ public class MainActivity extends BaseActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
-
 
     }
 
@@ -162,7 +160,7 @@ public class MainActivity extends BaseActivity {
     protected void initValue() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new MessageFragment());
+        fragmentList.add(new MailFragment());
         fragmentList.add(new ContactFragment());
         fragmentList.add(new ManageFragment());
         fragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -171,6 +169,7 @@ public class MainActivity extends BaseActivity {
 
         toolbar.setTitle("Main");
         setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         homeText.setTextColor(getResources().getColor(R.color.colorPrimary));
     }
@@ -194,12 +193,9 @@ public class MainActivity extends BaseActivity {
 
             isOperationMenuShowed = true;
 
-
             ListView operationMainList = (ListView) view.findViewById(R.id.operationMainList);
-
             operationMainList.setAdapter(new SimpleAdapter(MainActivity.this, getOperations(), R.layout.item_operation_menu,
                     new String[]{"operation"}, new int[]{R.id.operationText}));
-
 
             operationMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -223,7 +219,6 @@ public class MainActivity extends BaseActivity {
                     isOperationMenuShowed = false;
                 }
             });
-
         }
 
     }

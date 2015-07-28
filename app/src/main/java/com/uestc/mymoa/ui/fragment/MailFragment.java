@@ -12,11 +12,11 @@ import com.uestc.mymoa.R;
 /**
  * Created by nothisboy on 2015/7/26.
  */
-public class MessageFragment extends Fragment {
+public class MailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = getActivity().getLayoutInflater().inflate(R.layout.layout_main_message_fragment, null);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.layout_main_mail_fragment, null);
 
 
         return view;

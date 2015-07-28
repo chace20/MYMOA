@@ -14,19 +14,23 @@
             android:layout_height="wrap_content"
             android:hint="手机号"
             android:id="@+id/phoneEdit"
+            android:inputType="phone"
             android:layout_marginBottom="32dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/passEdit"
+            android:inputType="textPassword"
             android:hint="密码"/>
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        style="@style/buttonPrimary"
         android:layout_alignParentBottom="true"
         android:id="@+id/loginButton"
+        android:layout_marginBottom="16dp"
         android:text="登录"/>
 
 </RelativeLayout>

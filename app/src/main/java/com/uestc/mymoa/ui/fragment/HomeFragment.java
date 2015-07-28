@@ -1,5 +1,8 @@
 package com.uestc.mymoa.ui.fragment;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,11 +11,13 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.uestc.mymoa.ParentLayoutOfChildViewPager;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.ui.NewsListActivity;
 import com.uestc.mymoa.ui.adapter.NewsCategoryGridAdapter;
 import com.uestc.mymoa.ui.adapter.PostAdapter;
 
@@ -26,7 +31,14 @@ import java.util.TimerTask;
  */
 public class HomeFragment extends Fragment {
 
+    private Context context;
+
     private static final int CHANGE_POST = 0x110;
+
+    public static final int NEWS_LOCAL = 0;
+    public static final int NEWS_ENTERTAINMENT = 1;
+    public static final int NEWS_SCIENCE_AND_TEchnology = 2;
+    public static final int NEWS_BRIGHT_YELLOW = 3;
 
     private GridView newsCategoryGrid;
     private ViewPager postViewPager;
@@ -45,6 +57,8 @@ public class HomeFragment extends Fragment {
     private TimerTask timerTask;
 
     private int currentPostId = -1;
+
+    private boolean isTimerRunning = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,8 +111,10 @@ public class HomeFragment extends Fragment {
 
             }
         };
-
-        timer.schedule(timerTask,0,2000);
+        if (!isTimerRunning) {
+            isTimerRunning = true;
+            timer.schedule(timerTask, 0, 2000);
+        }
     }
 
     private void initView() {
@@ -124,12 +140,21 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        newsCategoryGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), NewsListActivity.class);
+                intent.putExtra("news_category", position);
+                startActivity(intent);
+            }
+        });
     }
 
-    private Handler postAutoChangeHandler = new Handler(){
+    private Handler postAutoChangeHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case CHANGE_POST:
                     postViewPager.setCurrentItem(currentPostId, true);
                     break;

@@ -16,7 +16,12 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.io.FileManageHandler;
+import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.FileneedStatus;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +39,37 @@ public class FileManageActivity extends BaseActivity{
     private String file_note_title;
     //private List<Map<String,Object>> file_list_listmap;
     private ArrayAdapter<String> filelistAdapter;
+    private void resume(){
+        RequestParams params=new RequestParams();
+
+        new FileManageHandler().process(params, new IOCallback< FileneedStatus>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(List<FileneedStatus> result) {
+
+            }
+
+            @Override
+            public void onSuccess( FileneedStatus result) {
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
 
     /**
      * 获取数据
      * */
-    private List<String> getAllfileNotes(){
-        List<String> list=new ArrayList<>();
+    public List<String> getAllfileNotes(String tempid,String temptitle){
 
-        /***/
-        return list;
     }
     @Override
     protected void initLayout() {

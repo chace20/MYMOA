@@ -11,7 +11,7 @@ public class FileManageEditActivity extends BaseActivity{
 
     @Override
     protected void initLayout() {
-/****/
+/***/
         //Intent intent_edit=new Intent(FileManageEditActivity.this,FileManageDetailActivity.class);
     }
 
@@ -34,7 +34,9 @@ public class FileManageEditActivity extends BaseActivity{
         intent.setClass(context,FileManageEditActivity.class);
         return intent;
     }
+
     /**
-     * 获取id及内容详情
+     *
      * */
+
 }

@@ -49,10 +49,10 @@ public class FileManageDetailActivity extends BaseActivity{
         return intent;
     }
 
-    /**得到文件id
-     * myfileId，author,time,text
-     * 加载详情
+
+    /**
      * */
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.action_edit:

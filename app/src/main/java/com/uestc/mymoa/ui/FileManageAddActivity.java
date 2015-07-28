@@ -28,9 +28,11 @@ public class FileManageAddActivity extends BaseActivity{
         btn_cre_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /**
-                 * ±£´æ²Ù×÷
+                 * ä¿å­˜æ“ä½œ
                  * **/
+
                 Intent intent=new Intent(FileManageAddActivity.this,FileManageActivity.class);
                 startActivity(intent);
             }

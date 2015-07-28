@@ -39,9 +39,11 @@ public class FileManageSearchActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
 
+
                 /**
-                 * 查找，获取id
+                 *
                  * */
+
                 searchList.setAdapter(getAdapter());
             }
 
@@ -52,9 +54,11 @@ public class FileManageSearchActivity extends BaseActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Cursor c = ((SimpleCursorAdapter) parent.getAdapter()).getCursor();
                 c.moveToPosition(position);
+
 /**
- * 获取文档id
+ *
  * */
+
                 int file_fileid = 0;
 
                 //int mId = c.getInt(c.getColumnIndex(DBHelperContract.NOTE_COLUMN._ID));

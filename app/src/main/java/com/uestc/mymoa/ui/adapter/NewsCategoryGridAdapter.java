@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uestc.mymoa.R;
-import com.uestc.mymoa.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +57,7 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
         AbsListView.LayoutParams params = new GridView.LayoutParams(
                 GridView.LayoutParams.MATCH_PARENT,
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
+                (context.getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
         convertView.setLayoutParams(params);
         return convertView;

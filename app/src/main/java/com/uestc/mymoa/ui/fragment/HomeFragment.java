@@ -130,9 +130,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 for (int i = 0; i < 4; i++) {
-                    listImage.get(i).setBackgroundColor(getActivity().getResources().getColor(R.color.white));
+                    listImage.get(i).setBackgroundResource(R.color.white);
                 }
-                listImage.get(position).setBackgroundColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                listImage.get(position).setBackgroundResource(R.color.colorPrimary);
             }
 
             @Override

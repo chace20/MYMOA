@@ -20,11 +20,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="登录">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.UserSigninActivity"
@@ -56,7 +52,19 @@
             android:label="新闻列表"></activity>
         <activity
             android:name=".ui.ContactGroupListActivity"
-            android:label="我的群租"></activity>
+            android:label="我的群租">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.ContactGroupDetailActivity"
+            android:label="群租详情"></activity>
+        <activity
+            android:name=".ui.ContactDetailActivity"
+            android:label="联系人信息"></activity>
     </application>
 
 </manifest>

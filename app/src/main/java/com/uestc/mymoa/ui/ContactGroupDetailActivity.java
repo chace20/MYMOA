@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,14 +32,14 @@ public class ContactGroupDetailActivity extends Activity {
 
     private ListView groupdetailList;
     private List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
-    private int groupid;
-
+    private String groupid;
     private void getGroupDetailList(){
 
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("groupid", String.valueOf(groupid));
+        params.addQueryStringParameter("groupid", groupid);
+        Log.e("null", "groupid2:" + groupid);
 
         new ContactHandler().getGroupDetailList(params, new IOCallback<HashMap<String, Object>>() {
             @Override
@@ -50,6 +51,8 @@ public class ContactGroupDetailActivity extends Activity {
             public void onSuccess(List<HashMap<String, Object>> result) {
 
                 list = result;
+                refreshAdapter();
+
             }
 
             @Override
@@ -68,8 +71,8 @@ public class ContactGroupDetailActivity extends Activity {
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("uid", uid);
-        params.addQueryStringParameter("groupid", String.valueOf(groupid));
+        params.addBodyParameter("uid", uid);
+        params.addBodyParameter("groupid",groupid);
 
         new ContactHandler().addGroupContact(params, new IOCallback<RequestStatus>() {
             @Override
@@ -108,9 +111,11 @@ public class ContactGroupDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        groupid = intent.getIntExtra("groupid", -1);
+        groupid = intent.getStringExtra("groupid");
+        Log.e("null", "groupid1:" + groupid);
         setContentView(R.layout.layout_groupdetail);
         groupdetailList = (ListView) findViewById(R.id.groupdetailList);
+        Log.e("null", "oncreate");
 
         groupdetailList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,18 +124,14 @@ public class ContactGroupDetailActivity extends Activity {
                 Intent intent = new Intent(ContactGroupDetailActivity.this,
                         ContactDetailActivity.class);
 
-                intent.putExtra("uid", (Integer) list.get(position)
-                        .get("uid"));
+                intent.putExtra("uid", list.get(position).get("uid").toString());
                 startActivity(intent);
             }
         });
+        getGroupDetailList();
     }
     @Override
-    protected void onResume() {
-        super.onResume();
-        getGroupDetailList();
-        refreshAdapter();
-    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_contact_add, menu);
         return true;

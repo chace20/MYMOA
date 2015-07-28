@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +45,7 @@ public class ContactGroupListActivity extends Activity {
             public void onSuccess(List<HashMap<String, Object>> result) {
 
                 list = result;
+                refreshAdapter();
             }
 
             @Override
@@ -61,7 +63,7 @@ public class ContactGroupListActivity extends Activity {
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("groupname", groupname);
+        params.addBodyParameter("groupname", groupname);
 
         new ContactHandler().addGroup(params, new IOCallback<RequestStatus>() {
             @Override
@@ -110,18 +112,15 @@ public class ContactGroupListActivity extends Activity {
                 Intent intent = new Intent(ContactGroupListActivity.this,
                         ContactGroupDetailActivity.class);
 
-                intent.putExtra("groupid", (Integer) list.get(position)
-                        .get("groupid"));
+                String str = list.get(position)
+                        .get("groupid").toString();
+                intent.putExtra("groupid", str.substring(0, str.lastIndexOf(".")));
                 startActivity(intent);
             }
         });
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
         getGroupList();
-        refreshAdapter();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_contact_add, menu);

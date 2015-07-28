@@ -1,5 +1,7 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
@@ -68,15 +70,14 @@ public class ContactHandler extends IOHandler{
         final IOCallback<HashMap<String,Object>> callback = ioCallback;
 
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.POST,
+        http.send(HttpRequest.HttpMethod.GET,
                 Api.Contact.queryGroupContactList,
                 params,
                 new RequestCallBack<String>() {
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         Type listType = new TypeToken<List<HashMap<String, Object>>>() {
-                        }
-                                .getType();
+                        }.getType();
                         Gson gson = new Gson();
 
                         List < HashMap < String, Object >> list =
@@ -97,17 +98,23 @@ public class ContactHandler extends IOHandler{
         final IOCallback<HashMap<String,Object>> callback = ioCallback;
 
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.POST,
+        http.send(HttpRequest.HttpMethod.GET,
                 Api.Contact.queryContactContent,
                 params,
                 new RequestCallBack<String>() {
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        Log.e("null", "start");
+                    }
+
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         Type mapType = new TypeToken<HashMap<String, Object>>() {
-
                         }.getType();
                         Gson gson = new Gson();
-
+                        Log.e("null", "res:"+responseInfo.result);
                         HashMap < String, Object > map =
                                 gson.fromJson(responseInfo.result, mapType);
                         callback.onSuccess(map);
@@ -117,6 +124,7 @@ public class ContactHandler extends IOHandler{
                     public void onFailure(HttpException error, String msg) {
 
                         callback.onFailure(msg);
+                        Log.e("null", "failed");
                     }
                 });
     }
@@ -125,7 +133,7 @@ public class ContactHandler extends IOHandler{
         final IOCallback<RequestStatus> callback = ioCallback;
 
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.POST,
+        http.send(HttpRequest.HttpMethod.GET,
                 Api.Contact.delContact,
                 params,
                 new RequestCallBack<String>() {

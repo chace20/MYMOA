@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,14 +28,14 @@ public class ContactDetailActivity extends Activity {
     private TextView nameText;
     private TextView phonenumText;
     private Button delcontactButton;
-    private int uid;
+    private String uid;
     private HashMap<String, Object> map = new HashMap<String, Object>();
 
     private void getContactDetail(){
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("uid", String.valueOf(uid));
+        params.addQueryStringParameter("uid", uid);
 
         new ContactHandler().getContactDetail(params, new IOCallback<HashMap<String, Object>>() {
             @Override
@@ -50,6 +51,10 @@ public class ContactDetailActivity extends Activity {
             @Override
             public void onSuccess(HashMap<String, Object> result) {
                 map = result;
+                Log.e("null", "map:" + map);
+                nameText.setText(map.get("uname").toString());
+                phonenumText.setText(map.get("uid").toString());
+
             }
 
             @Override
@@ -97,7 +102,8 @@ public class ContactDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        uid = intent.getIntExtra("uid", -1);
+        uid = intent.getStringExtra("uid");
+        Log.e("null", "uid:" + uid);
         setContentView(R.layout.layout_contactdetail);
         nameText = (TextView) findViewById(R.id.nameText);
         phonenumText = (TextView) findViewById(R.id.phonenumText);
@@ -120,13 +126,7 @@ public class ContactDetailActivity extends Activity {
                         .show();
             }
         });
-    }
-    @Override
-    protected void onResume() {
         getContactDetail();
-        if(Integer.parseInt(map.get("uid").toString()) != -1){
-            nameText.setText(map.get("uname").toString());
-            phonenumText.setText(map.get("phonenum").toString());
-        }
     }
+
 }

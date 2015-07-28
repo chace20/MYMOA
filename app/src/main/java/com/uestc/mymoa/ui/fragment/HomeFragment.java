@@ -1,5 +1,7 @@
 package com.uestc.mymoa.ui.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +30,8 @@ import java.util.TimerTask;
  * Created by nothisboy on 2015/7/26.
  */
 public class HomeFragment extends Fragment {
+
+    private Context context;
 
     private static final int CHANGE_POST = 0x110;
 

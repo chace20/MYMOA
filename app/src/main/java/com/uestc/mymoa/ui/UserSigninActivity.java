@@ -111,9 +111,9 @@ public class UserSigninActivity extends BaseActivity {
         final String phone = phoneEdit.getText().toString();
         String name = nameEdit.getText().toString();
         String pass = passEdit.getText().toString();
-        params.addQueryStringParameter("phone", phone);
-        params.addQueryStringParameter("name",name);
-        params.addQueryStringParameter("password",pass);
+        params.addBodyParameter("phone", phone);
+        params.addBodyParameter("name",name);
+        params.addBodyParameter("password",pass);
 
         handler.process(params, new IOCallback<RequestStatus>() {
             @Override
@@ -136,6 +136,7 @@ public class UserSigninActivity extends BaseActivity {
                     Id.userId =phone;
 
                     startActivity(new Intent(UserSigninActivity.this, MainActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(UserSigninActivity.this, "用户已存在", Toast.LENGTH_SHORT).show();
                 }

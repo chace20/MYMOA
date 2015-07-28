@@ -15,11 +15,6 @@
             android:name=".ui.MainActivity"
             android:theme="@style/NoActionBarTheme"
             android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.UserLoginActivity"
@@ -28,7 +23,13 @@
         <activity
             android:name=".ui.UserSelectActivity"
             android:label="@string/app_name"
-            android:theme="@style/NoActionBarTheme"></activity>
+            android:theme="@style/NoActionBarTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.UserSigninActivity"
             android:label="注册"></activity>

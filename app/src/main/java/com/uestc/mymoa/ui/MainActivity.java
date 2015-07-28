@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.uestc.mymoa.SelectActivity;
+import com.uestc.mymoa.constant.BroadCastAction;
 import com.uestc.mymoa.ui.fragment.ContactFragment;
 import com.uestc.mymoa.ui.fragment.HomeFragment;
 import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
@@ -316,6 +317,9 @@ public class MainActivity extends BaseActivity {
             operationMenu.dismiss();
             isOperationMenuShowed = false;
         } else {
+            Intent intent = new Intent();
+            intent.setAction(BroadCastAction.ACTION_FINISH);
+            sendBroadcast(intent);
             super.onBackPressed();
         }
     }

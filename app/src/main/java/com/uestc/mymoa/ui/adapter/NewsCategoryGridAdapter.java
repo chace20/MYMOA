@@ -58,7 +58,7 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
         newsCategoryText.setText(list.get(position));
 
         AbsListView.LayoutParams params = new GridView.LayoutParams(
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3,
+                GridView.LayoutParams.MATCH_PARENT,
                 (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
         convertView.setLayoutParams(params);
@@ -67,10 +67,10 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
     private List<String> getListData() {
         List<String> list = new ArrayList<>();
-        list.add("本地");
-        list.add("娱乐");
-        list.add("科技");
-        list.add("亮黄色");
+        list.add("娱乐");//id -- 1
+        list.add("军事");//2
+        list.add("科技");//2
+        list.add("体育");//2
         return list;
     }
 }

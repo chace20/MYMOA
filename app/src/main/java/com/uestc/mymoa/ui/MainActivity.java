@@ -1,7 +1,11 @@
 package com.uestc.mymoa.ui;
 
+import com.uestc.mymoa.R;
+
+import android.media.Image;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -14,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -21,13 +26,14 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.uestc.mymoa.SelectActivity;
 import com.uestc.mymoa.ui.fragment.ContactFragment;
 import com.uestc.mymoa.ui.fragment.HomeFragment;
 import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
 import com.uestc.mymoa.ui.fragment.ManageFragment;
 import com.uestc.mymoa.ui.fragment.MessageFragment;
-import com.uestc.mymoa.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,8 +71,19 @@ public class MainActivity extends BaseActivity {
     private MainFragmentPagerAdapter fragmentPagerAdapter;
     private List<Fragment> fragmentList;
 
+    @ViewInject(R.id.homeImage)
+    private ImageView homeImage;
+    @ViewInject(R.id.messageImage)
+    private ImageView messageImage;
+    @ViewInject(R.id.contactImage)
+    private ImageView contactImage;
+    @ViewInject(R.id.manageIamge)
+    private ImageView manageImage;
+
+
     @Override
     protected void initLayout() {
+        ViewUtils.inject(this);
         homeLinear = (LinearLayout) findViewById(R.id.homeLinear);
         messageLinear = (LinearLayout) findViewById(R.id.messageLinear);
         contactLinear = (LinearLayout) findViewById(R.id.contactLinear);
@@ -169,7 +186,11 @@ public class MainActivity extends BaseActivity {
 
             operationMenu = new PopupWindow(view, getWindow().getDecorView().getWidth() / 3, ViewGroup.LayoutParams.WRAP_CONTENT);
             operationMenu.setAnimationStyle(R.style.popWindowAnimation);
-            operationMenu.showAtLocation(toolbar, Gravity.RIGHT, 0, 0);
+            Rect frame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+            int statusBarHeight = frame.top;
+            operationMenu.showAtLocation(viewpager, Gravity.NO_GRAVITY, getWindow().getDecorView().getWidth(), toolbar.getHeight() + statusBarHeight);
+
             isOperationMenuShowed = true;
 
 
@@ -227,31 +248,39 @@ public class MainActivity extends BaseActivity {
     private void setBottomTextColor(int previousPagerPosition, int currentPagerPosition) {
         switch (previousPagerPosition) {
             case CURRENT_IS_HOME:
+                homeImage.setImageResource(R.drawable.ic_main_home_normal);
                 homeText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_MESSAGE:
+                messageImage.setImageResource(R.drawable.ic_main_mail_normal);
                 messageText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_CONTACT:
+                contactImage.setImageResource(R.drawable.ic_main_contact_normal);
                 contactText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_MANAGE:
+                manageImage.setImageResource(R.drawable.ic_main_manage_normal);
                 manageText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
         }
 
         switch (currentPagerPosition) {
             case CURRENT_IS_HOME:
-                homeText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                homeImage.setImageResource(R.drawable.ic_main_home_focus);
+                homeText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case CURRENT_IS_MESSAGE:
-                messageText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                messageImage.setImageResource(R.drawable.ic_main_mail_focus);
+                messageText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case CURRENT_IS_CONTACT:
-                contactText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                contactImage.setImageResource(R.drawable.ic_main_contact_focus);
+                contactText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case CURRENT_IS_MANAGE:
-                manageText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                manageImage.setImageResource(R.drawable.ic_main_manage_focus);
+                manageText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
         }
 

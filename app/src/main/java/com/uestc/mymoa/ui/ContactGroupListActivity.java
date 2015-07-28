@@ -1,16 +1,28 @@
 package com.uestc.mymoa.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.io.ContactHandler;
+import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.RequestStatus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by SinLapis on 2015/7/26.
@@ -18,11 +30,66 @@ import java.util.HashMap;
 public class ContactGroupListActivity extends Activity {
 
     private ListView groupList;
-    private ArrayList<HashMap<String, Object>> list;
+    private List<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
 
-    private void getData(){
-        //TODO
+    private void getGroupList(){
+
+        new ContactHandler().getGroupList(new IOCallback<HashMap<String, Object>>() {
+            @Override
+            public void onStart() {
+                //TODO
+            }
+
+            @Override
+            public void onSuccess(List<HashMap<String, Object>> result) {
+
+                list = result;
+            }
+
+            @Override
+            public void onSuccess(HashMap<String, Object> result) {
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
+    private void addGroup(String groupname){
+
+        RequestParams params = new RequestParams();
+
+        params.addQueryStringParameter("groupname", groupname);
+
+        new ContactHandler().addGroup(params, new IOCallback<RequestStatus>() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess(List<RequestStatus> result) {
+
+            }
+
+            @Override
+            public void onSuccess(RequestStatus result) {
+                if (result.code == 200) {
+                    Toast.makeText(ContactGroupListActivity.this, "添加联系人群组成功",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ContactGroupListActivity.this, "添加联系人群组失败",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+            }
+        });
+    }
+
     private void refreshAdapter(){
         groupList.setAdapter(new SimpleAdapter(ContactGroupListActivity.this,
                 list, R.layout.item_contact,
@@ -52,7 +119,39 @@ public class ContactGroupListActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        getGroupList();
         refreshAdapter();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_contact_add, menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_add) {
+
+            final EditText addGroupEdit = new EditText(ContactGroupListActivity.this);
+            addGroupEdit.setHint("请输入群组名称");
+            new  AlertDialog.Builder(ContactGroupListActivity.this)
+                    .setTitle("新建联系人群组")
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setView(addGroupEdit)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            addGroup(addGroupEdit.getText().toString());
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .show();
+            getGroupList();
+            refreshAdapter();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 

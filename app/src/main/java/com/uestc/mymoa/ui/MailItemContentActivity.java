@@ -23,16 +23,16 @@ public class MailItemContentActivity extends BaseActivity {
 
     private MailQueryMailContentHandler handler;
 
-    private TextView tagText;
-    private TextView unameText;
+    private TextView fromUnameText;
+    private TextView toUnameText;
     private TextView uidText;
     private TextView timeText;
     private TextView contentText;
 
     @Override
     protected void initLayout() {
-        tagText = (TextView) findViewById(R.id.tagMailContentText);
-        unameText = (TextView) findViewById(R.id.unameMailContentText);
+        fromUnameText = (TextView) findViewById(R.id.tagMailContentText);
+        toUnameText = (TextView) findViewById(R.id.unameMailContentText);
         uidText = (TextView) findViewById(R.id.uidMailContentText);
         timeText = (TextView) findViewById(R.id.timeMailContentText);
         contentText = (TextView) findViewById(R.id.contentMailContentText);
@@ -85,7 +85,7 @@ public class MailItemContentActivity extends BaseActivity {
 
     private void initView(HashMap<String, String> map) {
         if (map.get("fromuid").equals(Id.userId)) {
-            tagText.setText("发给");
+            fromUnameText.setText("我 发至 ");
 
             uidText.setText(map.get("touid"));
             timeText.setText(map.get("time"));
@@ -103,7 +103,7 @@ public class MailItemContentActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(Object result) {
-                    unameText.setText((CharSequence) ((HashMap<String, Object>) result).get("uname"));
+                    toUnameText.setText((CharSequence) ((HashMap<String, Object>) result).get("uname"));
                 }
 
                 @Override
@@ -112,7 +112,7 @@ public class MailItemContentActivity extends BaseActivity {
                 }
             });
         } else {
-            tagText.setText("来自");
+            toUnameText.setText(" 发至 我");
             uidText.setText(map.get("fromuid"));
             timeText.setText(map.get("time"));
             contentText.setText(map.get("content"));
@@ -129,7 +129,7 @@ public class MailItemContentActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(Object result) {
-                    unameText.setText((CharSequence) ((HashMap<String, Object>) result).get("uname"));
+                    fromUnameText.setText((CharSequence) ((HashMap<String, Object>) result).get("uname"));
                 }
 
                 @Override

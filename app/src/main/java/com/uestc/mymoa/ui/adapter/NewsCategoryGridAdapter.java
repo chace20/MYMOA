@@ -57,7 +57,7 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
         AbsListView.LayoutParams params = new GridView.LayoutParams(
                 GridView.LayoutParams.MATCH_PARENT,
-                (context.getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
+                ((context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
         convertView.setLayoutParams(params);
         return convertView;

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="64dp"
+    android:gravity="center_vertical"
+    android:background="@drawable/selector_item_news_category"
     android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-<TextView
-    android:id="@+id/file_lv_tv_text"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:text=""
-    android:textColor="#8a000000"
-    android:gravity="left"
-    android:textSize="30sp"
-    />
+    android:paddingLeft="16dp">
+
+    <TextView
+        android:id="@+id/file_lv_tv_text"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical"
+        android:text="文档标题"
+        android:textColor="@color/text_black_87"
+        android:textSize="18sp" />
 </LinearLayout>

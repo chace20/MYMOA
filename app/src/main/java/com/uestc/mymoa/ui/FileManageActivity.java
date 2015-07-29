@@ -1,10 +1,12 @@
 package com.uestc.mymoa.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +17,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.io.DocDelDocHanlder;
+import com.uestc.mymoa.io.DocQueryDocListHandler;
+import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.DocContent;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 /**
@@ -32,21 +44,47 @@ public class FileManageActivity extends BaseActivity{
     private ListView noteList;
     private int file_note_id;
     private String file_note_title;
-    //private List<Map<String,Object>> file_list_listmap;
-    private ArrayAdapter<String> filelistAdapter;
-
-    /**
-     * 获取数据
-     * */
-    private List<String> getAllfileNotes(){
-        List<String> list=new ArrayList<>();
-
-        /***/
-        return list;
+    private List<Map<String,Object>> fileListListmap=new ArrayList<>();
+    private BaseAdapter filelistAdapter;
+    private void h(){
+        Log.i("err","bdbdbdbdbdbdb");
     }
+
+    private void resume(){
+        RequestParams params=new RequestParams();
+        Log.i("err","resum1");
+        new DocQueryDocListHandler().process(params, new IOCallback<Map<String,Object>>() {
+            @Override
+            public void onStart() {
+h();
+            }
+
+            @Override
+            public void onSuccess(List<Map<String,Object>> result) {
+                fileListListmap=result;
+                Log.i("err",""+"dddddddd");
+                getAdapter(fileListListmap);
+                /**reflash*/
+                reFlash();
+            }
+
+            @Override
+            public void onSuccess(Map<String,Object> result) {
+                Log.i("err","success");
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Log.i("err","failure");
+            }
+        });
+    }
+
     @Override
     protected void initLayout() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
         noteList=(ListView)findViewById(R.id.lv_filemanage_file);
+
     }
     @Override
     protected void initListener() {
@@ -56,14 +94,14 @@ public class FileManageActivity extends BaseActivity{
         noteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor c = ((SimpleCursorAdapter) parent.getAdapter()).getCursor();
-                c.moveToPosition(position);
 /**
  * 获取文档id
  * */
-                int file_fileid=0;
-                //int mId = c.getInt(c.getColumnIndex(DBHelperContract.NOTE_COLUMN._ID));
-                startActivity(FileManageDetailActivity.createInent(FileManageActivity.this, file_fileid));
+                Intent intent=new Intent(FileManageActivity.this,FileManageDetailActivity.class);
+
+                int docid = (int)((double)fileListListmap.get(position).get("docid")+0.5);
+                intent.putExtra("docid",docid);
+                startActivity(intent);
             }
         });
 
@@ -72,38 +110,66 @@ public class FileManageActivity extends BaseActivity{
          * */
         noteList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-               // Cursor c = ((SimpleCursorAdapter) parent.getAdapter()).getCursor();
-               // c.moveToPosition(position);
-                /**
-                 * 获取删除文档id
-                 * **/
-                //final String messageId = c.getInt(c.getColumnIndex(DBHelperContract.NOTE_COLUMN._ID));
+            public boolean onItemLongClick(AdapterView<?> parent, View view,final int position, long id) {
 
                 new AlertDialog.Builder(FileManageActivity.this)
-                        .setTitle("delete?")
-                        .setPositiveButton("Y", new DialogInterface.OnClickListener() {
+                        .setTitle("确定删除？")
+                        .setPositiveButton("删除", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 /**
                                  * 删除操作
                                  * */
-                                setAdapter();
+                                RequestParams params=new RequestParams();
+
+                                int id = (int)((double)fileListListmap.get(position).get("docid")+0.5);
+
+                                params.addBodyParameter("docid", id+"");
+                                new DocDelDocHanlder().process(params, new IOCallback() {
+                                    @Override
+                                    public void onStart() {
+
+                                    }
+
+                                    @Override
+                                    public void onSuccess(List result) {
+
+                                    }
+
+                                    @Override
+                                    public void onSuccess(Object result) {
+                                        if(((RequestStatus)result).code==200){
+                                            Toast.makeText(FileManageActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(FileManageActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
+                                        }
+                                        resume();
+                                    }
+
+                                    @Override
+                                    public void onFailure(String error) {
+                                        Toast.makeText(FileManageActivity.this,"网络错误."+error,Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         })
-                        .setNegativeButton("N", null).create()
+                        .setNegativeButton("取消", null).create()
                         .show();
                 return true;
             }
         });
     }
 
-    private BaseAdapter getAdapter(){
-        filelistAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,getAllfileNotes());
+    private BaseAdapter getAdapter(List<Map<String,Object>> list){
+        Log.i("err","adapter");
+        filelistAdapter=new SimpleAdapter(this,list,R.layout.layout_filemanage_list_item,new String[]{"title"},new int[]{R.id.file_lv_tv_text});
         return filelistAdapter;
     }
     @Override
     protected void initValue() {
+        Log.i("err","initvalue");
+        resume();
+        Log.i("err","initvalue2");
     }
     @Override
     protected int setRootView() {
@@ -133,8 +199,9 @@ public class FileManageActivity extends BaseActivity{
         }
         return super.onOptionsItemSelected(item);
     }
-    public void setAdapter(){
-        /****/
+    public void reFlash(){
+        noteList.setAdapter(getAdapter(fileListListmap));
+
     }
 
 }

@@ -11,7 +11,7 @@ import com.uestc.mymoa.R;
 /**
  * Created by SinLapis on 2015/7/29.
  */
-public class NewsReleaseActivity extends BaseActivity{
+public class NewsReleaseActivity extends BaseActivity {
 
     private EditText newsReleaseTitleText;
     private EditText newsReleaseContentText;
@@ -52,6 +52,7 @@ public class NewsReleaseActivity extends BaseActivity{
 
     @Override
     protected void initValue() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
 
     }
 

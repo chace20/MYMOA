@@ -15,6 +15,8 @@ import com.uestc.mymoa.io.model.RequestStatus;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by nothisboy on 2015/7/27.
@@ -81,8 +83,15 @@ public class MailSendNewActivity extends BaseActivity {
             public void onSuccess(Object result) {
 
                 if (((RequestStatus)result).code == 200) {
-                    Toast.makeText(MailSendNewActivity.this,"发送成功",Toast.LENGTH_SHORT).show();
-                    finish();
+                    Toast.makeText(MailSendNewActivity.this,"发送成功啦",Toast.LENGTH_SHORT).show();
+                    Timer timer = new Timer();
+                    TimerTask task = new TimerTask() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    };
+                    timer.schedule(task, 500);
                 }
             }
 

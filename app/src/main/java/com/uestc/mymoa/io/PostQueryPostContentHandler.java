@@ -46,7 +46,7 @@ public class PostQueryPostContentHandler extends IOHandler {
                 String result = String.valueOf(responseInfo.result);
 
                 if (result.indexOf("title") != -1) {
-                    Type mapType = new TypeToken<HashMap<String, Object>>() {
+                    Type mapType = new TypeToken<HashMap<String, String>>() {
                     }.getType();
                     Gson gson = new Gson();
                     HashMap<String, Object> map = gson.fromJson(responseInfo.result, mapType);

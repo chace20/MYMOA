@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     android:orientation="vertical">
 
     <EditText
@@ -18,9 +19,11 @@
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:layout_weight="1"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <EditText
+            android:paddingTop="16dp"
             android:id="@+id/contentMailEdit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -28,10 +31,10 @@
     </LinearLayout>
 
     <Button
-        android:layout_margin="16dp"
         android:id="@+id/sendButton"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
+        android:layout_margin="16dp"
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="发送" />

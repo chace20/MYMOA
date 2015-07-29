@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by SinLapis on 2015/7/29.
  */
-public class NewsReleaseActivity extends BaseActivity{
+public class NewsReleaseActivity extends BaseActivity {
 
     private EditText newsReleaseTitleText;
     private EditText newsReleaseContentText;
@@ -33,7 +33,7 @@ public class NewsReleaseActivity extends BaseActivity{
 
     private String typeid;
 
-    private void addNews(){
+    private void addNews() {
 
         RequestParams params = new RequestParams();
 
@@ -68,6 +68,7 @@ public class NewsReleaseActivity extends BaseActivity{
             }
         });
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +94,7 @@ public class NewsReleaseActivity extends BaseActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                typeid = String.valueOf((position+1));
+                typeid = String.valueOf((position + 1));
             }
         });
     }

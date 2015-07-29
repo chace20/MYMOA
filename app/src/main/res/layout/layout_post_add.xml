@@ -27,6 +27,7 @@
             android:id="@+id/postContentEdit"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
             android:background="@null"
             android:hint="公告内容"
             android:paddingTop="16dp" />

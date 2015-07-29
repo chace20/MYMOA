@@ -2,6 +2,8 @@ package com.uestc.mymoa.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,8 +21,12 @@ import com.uestc.mymoa.R;
 import com.uestc.mymoa.constant.Id;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.MailQueryMailListHandler;
+import com.uestc.mymoa.io.UserQueryUserHandler;
 import com.uestc.mymoa.ui.MailItemContentActivity;
+import com.uestc.mymoa.ui.adapter.MailListAdapter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,9 +35,14 @@ import java.util.Map;
  */
 public class MailFragment extends Fragment {
 
+    private static final int SEND = 0;
+    private static final int RESIEVE = 0;
+
     private ListView mailHistoryList;
     private MailQueryMailListHandler handler;
-    private List<Map<String, Object>> mailList;
+    private List<HashMap<String, Object>> mailList;
+
+    private String uname;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +60,7 @@ public class MailFragment extends Fragment {
     }
 
     private void initValues() {
+        mailList = new ArrayList<>();
         handler = new MailQueryMailListHandler();
         getData();
     }
@@ -75,11 +87,9 @@ public class MailFragment extends Fragment {
 
             @Override
             public void onSuccess(List result) {
-                mailList = result;
-                mailHistoryList.setAdapter(new SimpleAdapter(getActivity(), mailList, R.layout.item_mail_history,
-                        new String[]{"name", "time", "content"},
-                        new int[]{R.id.mailUnameText, R.id.mailTimeText, R.id.mailContentText}));
-
+                List<HashMap<String, Object>> list = result;
+                mailList = list;
+                mailHistoryList.setAdapter(new MailListAdapter(getActivity(),list));
             }
 
             @Override
@@ -93,12 +103,32 @@ public class MailFragment extends Fragment {
         });
     }
 
-    private String getNameById(){
-        String name = "";
+    private void getNameById(String uid) {
 
-        
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter("id", uid);
+        new UserQueryUserHandler().process(params, new IOCallback() {
+            @Override
+            public void onStart() {
+            }
 
-        return name;
+            @Override
+            public void onSuccess(List result) {
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                HashMap<String, Object> map = (HashMap<String, Object>) result;
+                uname = null;
+                uname = String.valueOf(map.get("uname"));
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(getActivity(), "internet error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

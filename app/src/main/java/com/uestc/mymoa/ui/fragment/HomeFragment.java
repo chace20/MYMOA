@@ -174,9 +174,9 @@ public class HomeFragment extends Fragment {
 
     private void getPostList(){
         handler.process(null, new IOCallback() {
+
             @Override
             public void onStart() {
-
             }
 
             @Override

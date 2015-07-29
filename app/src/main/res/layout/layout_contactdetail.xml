@@ -31,9 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_black_87"
+                android:textSize="32sp"
+                android:textColor="@color/text_black_54"
                 android:gravity="center_horizontal"
                 android:id="@+id/unameText"/>
         </LinearLayout>
@@ -48,10 +47,10 @@
        <RelativeLayout
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
-           android:layout_weight="0.3">
+           android:layout_weight="0.5">
            <ImageView
-               android:layout_width="56dp"
-               android:layout_height="56dp"
+               android:layout_width="36dp"
+               android:layout_height="36dp"
                android:id="@+id/imageView"
                android:src="@drawable/ic_contact_phone"
                android:layout_gravity="center_horizontal"
@@ -74,10 +73,16 @@
 
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/delcontactButton"
-        android:id="@+id/delcontactButton"
-        android:layout_gravity="center_horizontal" />
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delcontactButton"
+            android:id="@+id/delcontactButton"
+            android:layout_margin="16dp"
+            style="@style/buttonPrimary"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 </LinearLayout>

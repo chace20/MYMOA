@@ -1,4 +1,4 @@
-package com.uestc.mymoa;
+package com.uestc.mymoa.ui;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -11,9 +11,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.uestc.mymoa.constant.Api;
+import com.uestc.mymoa.R;
 import com.uestc.mymoa.io.model.Post;
-import com.uestc.mymoa.ui.adapter.PostDBAdapter;
 
 import java.util.Calendar;
 
@@ -43,11 +42,13 @@ public class PostAddActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_add);
 
-        initLayout();
-        initListener();
+        etTitle=(EditText)findViewById(R.id.title);
+        etArticle=(EditText)findViewById(R.id.article);
+        btnStart=(Button)findViewById(R.id.start_date);
+        btnFinal=(Button)findViewById(R.id.final_date);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_add);
+
+
         pickDate = (Button) findViewById(R.id.start_date);
         pickDate.setOnClickListener(new DateButtonOnClickListener());
         final Calendar c1 = Calendar.getInstance();
@@ -55,9 +56,9 @@ public class PostAddActivity extends Activity {
         mMonth = c1.get(Calendar.MONTH);
         mDay = c1.get(Calendar.DAY_OF_MONTH);
         startdate = ""+mYear+"-"+mMonth+"-"+mDay;
+        btnStart.setText(startdate);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_add);
+
         pickDate = (Button) findViewById(R.id.final_date);
         pickDate.setOnClickListener(new DateButtonOnClickListener());
         final Calendar c2 = Calendar.getInstance();
@@ -65,38 +66,29 @@ public class PostAddActivity extends Activity {
         mMonth = c2.get(Calendar.MONTH);
         mDay = c2.get(Calendar.DAY_OF_MONTH);
         finaldate = ""+mYear+"-"+mMonth+"-"+mDay;
-
+        btnFinal.setText(finaldate);
 
         setDateTime();
-    }
 
-    private void initLayout(){
-        etTitle=(EditText)findViewById(R.id.title);
-        etArticle=(EditText)findViewById(R.id.article);
-        btnStart=(Button)findViewById(R.id.start_date);
-        btnFinal=(Button)findViewById(R.id.final_date);
+
         btnIssus=(Button)findViewById(R.id.issue);
-    }
-
-    private void initListener(){
         btnIssus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Post post = new Post();
-                PostDBAdapter postDBAdapter = new PostDBAdapter(PostAddActivity.this);
                 post.title = String.valueOf(etTitle.getText());
                 post.article = String.valueOf(etArticle.getText());
 
-
-                postDBAdapter.open();
-                postDBAdapter.insertOnePost(post);
-                postDBAdapter.close();
-
-                PostAddActivity.this.onBackPressed();
             }
-        });
 
+        });
     }
+
+
+
+
+
+
 
     private void setDateTime() {
 

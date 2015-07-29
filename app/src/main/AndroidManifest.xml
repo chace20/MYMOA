@@ -48,7 +48,7 @@
         <activity android:name=".ui.FileManageEditActivity"
             android:label="编辑文档">
         </activity>
-        <activity android:name=".PostAddActivity"></activity>
+        <activity android:name=".ui.PostAddActivity"></activity>
     </application>
 
 </manifest>

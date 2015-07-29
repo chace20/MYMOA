@@ -5,10 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.uestc.mymoa.PostAddActivity;
 import com.uestc.mymoa.io.model.Post;
-
-import java.sql.SQLException;
 
 /**
  * Created by HeGang on 2015/7/27.

@@ -3,33 +3,46 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="fill_parent">
+
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:orientation="vertical"
-        android:background="#cccccc">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="公告详情"
-            android:textSize="30sp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/textView" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/u24"/>
+            android:id="@+id/date"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"/>
     </RelativeLayout>
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/article"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"/>
+
+
     </RelativeLayout>
+
 
 </LinearLayout>

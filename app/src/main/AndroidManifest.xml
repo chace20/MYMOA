@@ -15,8 +15,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/NoActionBarTheme">
-        </activity>
+            android:theme="@style/NoActionBarTheme"></activity>
         <activity
             android:name=".ui.UserLoginActivity"
             android:label="@string/app_name"></activity>
@@ -34,24 +33,27 @@
         <activity
             android:name=".ui.UserSigninActivity"
             android:label="注册"></activity>
-        <activity android:name=".ui.FileManageActivity"
-            android:label="文档管理">
-        </activity>
-        <activity android:name=".ui.FileManageAddActivity"
-            android:label="新建文档">
-        </activity>
-        <activity android:name=".ui.FileManageDetailActivity"
-            android:label="文档详情">
-        </activity>
-        <activity android:name=".ui.FileManageSearchActivity"
-            android:label="搜索文档">
-        </activity>
-        <activity android:name=".ui.FileManageEditActivity"
-            android:label="编辑文档">
-        </activity>
+        <activity
+            android:name=".ui.FileManageActivity"
+            android:label="文档管理"></activity>
+        <activity
+            android:name=".ui.FileManageAddActivity"
+            android:label="新建文档"></activity>
+        <activity
+            android:name=".ui.FileManageDetailActivity"
+            android:label="文档详情"></activity>
+        <activity
+            android:name=".ui.FileManageSearchActivity"
+            android:label="搜索文档"></activity>
+        <activity
+            android:name=".ui.FileManageEditActivity"
+            android:label="编辑文档"></activity>
         <activity
             android:name=".ui.PostAddActivity"
             android:label="发布公告"></activity>
+        <activity
+            android:name=".ui.PostDetailActivity"
+            android:label="公告详情"></activity>
         <activity
             android:name=".ui.MailSendNewActivity"
             android:label="发送新消息"></activity>
@@ -64,7 +66,8 @@
         <activity
             android:name=".ui.ContactGroupListActivity"
             android:label="我的群组"></activity>
-        <activity android:name=".ui.NewsContentActivity"
+        <activity
+            android:name=".ui.NewsContentActivity"
             android:label="新闻详情"></activity>
 
         <activity

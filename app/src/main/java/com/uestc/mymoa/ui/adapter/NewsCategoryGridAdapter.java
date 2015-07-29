@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uestc.mymoa.R;
-import com.uestc.mymoa.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +57,11 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
         AbsListView.LayoutParams params = new GridView.LayoutParams(
                 GridView.LayoutParams.MATCH_PARENT,
+<<<<<<< HEAD
                 ((context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
+=======
+                (context.getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
+>>>>>>> 7e73fe1b8604c8aa190ded8b331f9e542704c36c
 
         convertView.setLayoutParams(params);
         return convertView;
@@ -67,10 +69,10 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
     private List<String> getListData() {
         List<String> list = new ArrayList<>();
-        list.add("本地");
-        list.add("娱乐");
-        list.add("科技");
-        list.add("亮黄色");
+        list.add("娱乐");//id -- 1
+        list.add("军事");//2
+        list.add("科技");//2
+        list.add("体育");//2
         return list;
     }
 }

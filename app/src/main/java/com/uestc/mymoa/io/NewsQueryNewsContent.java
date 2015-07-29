@@ -1,6 +1,7 @@
 package com.uestc.mymoa.io;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -10,6 +11,9 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.uestc.mymoa.constant.Api;
 import com.uestc.mymoa.io.model.NewsContent;
 import com.uestc.mymoa.io.model.RequestStatus;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
 
 /**
  * Created by nothisboy on 2015/7/28.
@@ -34,14 +38,17 @@ public class NewsQueryNewsContent extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                String result = String.valueOf(responseInfo);
-                if (result.indexOf("newsid") > 0) {
+                String result = String.valueOf(responseInfo.result);
+
+                if (result.indexOf("newsid") != -1) {
+                    Type mapType = new TypeToken<HashMap<String, Object>>() {
+                    }.getType();
                     Gson gson = new Gson();
-                    NewsContent newsContent = gson.fromJson(responseInfo.result,NewsContent.class);
-                    callback.onSuccess(newsContent);
-                }else {
+                    HashMap<String, Object> map = gson.fromJson(responseInfo.result, mapType);
+                    callback.onSuccess(map);
+                } else {
                     Gson gson = new Gson();
-                    RequestStatus status = gson.fromJson(responseInfo.result,RequestStatus.class);
+                    RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);
                     callback.onSuccess(status);
                 }
             }

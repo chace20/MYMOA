@@ -1,6 +1,9 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -13,6 +16,9 @@ import com.uestc.mymoa.io.model.RequestStatus;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.HashMap;
 
 /**
  * Created by nothisboy on 2015/7/28.
@@ -37,20 +43,14 @@ public class PostQueryPostContentHandler extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                String result = String.valueOf(responseInfo);
+                String result = String.valueOf(responseInfo.result);
+
                 if (result.indexOf("title") != -1) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(result);
-                        PostContent postContent = new PostContent();
-                        postContent.title = (String) jsonObject.get("title");
-                        postContent.uname = (String) jsonObject.get("uname");
-                        postContent.content = (String) jsonObject.get("content");
-                        postContent.starttime = (String) jsonObject.get("starttime");
-                        postContent.endtime = (String) jsonObject.get("endtime");
-                        callback.onSuccess(postContent);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Type mapType = new TypeToken<HashMap<String, Object>>() {
+                    }.getType();
+                    Gson gson = new Gson();
+                    HashMap<String, Object> map = gson.fromJson(responseInfo.result, mapType);
+                    callback.onSuccess(map);
                 } else {
                     Gson gson = new Gson();
                     RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);
@@ -63,5 +63,6 @@ public class PostQueryPostContentHandler extends IOHandler {
 
             }
         });
+
     }
 }

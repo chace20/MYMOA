@@ -1,6 +1,7 @@
 package com.uestc.mymoa.io;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -15,7 +16,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -42,24 +45,15 @@ public class NewsQueryNewsList extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                List<NewsContent> list = new ArrayList<NewsContent>();
-                String result = String.valueOf(responseInfo);
+                String result = String.valueOf(responseInfo.result);
                 if (result.indexOf("[") != -1) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(responseInfo);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            NewsContent newsContent = new NewsContent();
-                            newsContent.newsid = (String) jsonObject.get("newsid");
-                            newsContent.title = (String) jsonObject.get("title");
-                            newsContent.uname = (String) jsonObject.get("uname");
-                            newsContent.content = (String) jsonObject.get("content");
-                            list.add(newsContent);
-                        }
-                        callback.onSuccess(list);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Type listType = new TypeToken<List<HashMap<String, Object>>>() {
+                    }.getType();
+                    Gson gson = new Gson();
+
+                    List<HashMap<String, Object>> list =
+                            gson.fromJson(responseInfo.result, listType);
+                    callback.onSuccess(list);
                 } else {
                     Gson gson = new Gson();
                     RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);

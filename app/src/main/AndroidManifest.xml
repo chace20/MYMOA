@@ -20,6 +20,7 @@
             android:theme="@style/NoActionBarTheme"></activity>
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/NoActionBarTheme"
             android:label="登录">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,10 +48,19 @@
             android:name=".ui.FileManageEditActivity"
             android:label="编辑文档"></activity>
         <activity
+            android:name=".ui.PostAddActivity"
+            android:label="发布公告"></activity>
+        <activity
+            android:name=".ui.MessageReleaseActivity"
+            android:label="发布新消息"></activity>
+        <activity
             android:name=".ui.NewsListActivity"
-            android:label="新闻列表">
-
-        </activity>
+            android:label="新闻列表"></activity>
+        <activity
+            android:name=".ui.ContactGroupListActivity"
+            android:label="我的群租"></activity>
+        <activity android:name=".ui.NewsContentActivity"
+            android:label="新闻详情"></activity>
     </application>
 
 

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,9 +57,9 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
         TextView newsCategoryText = (TextView) convertView.findViewById(R.id.newsCategoryText);
         newsCategoryText.setText(list.get(position));
 
-        AdapterView.LayoutParams params = new AdapterView.LayoutParams(
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3,
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
+        AbsListView.LayoutParams params = new GridView.LayoutParams(
+                GridView.LayoutParams.MATCH_PARENT,
+                ((context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
         convertView.setLayoutParams(params);
         return convertView;

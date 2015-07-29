@@ -73,6 +73,7 @@
         android:clickable="true"
         android:numColumns="3"
         android:scrollbars="none"
+        android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp" />
 
 </LinearLayout>

@@ -16,6 +16,8 @@ import java.util.HashMap;
  * Created by DBJ_MAC on 2015/7/27.
  */
 public class NewsContentActivity extends BaseActivity {
+    ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String,Object>>();
+    ListView lv=(ListView)this.findViewById(R.id.commentList);
     @Override
     protected void initLayout() {
         Button backBtn01=(Button)findViewById(R.id.backButton01) ;
@@ -30,30 +32,23 @@ public class NewsContentActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-        ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String,Object>>();
-        ListView lv=(ListView)this.findViewById(R.id.commentList);
+
+
         SimpleAdapter mSimpleAdapter = new SimpleAdapter
                 (this,listItem, R.layout.layout_comment_item, new String[] {"commentorText","dateText03", "commentText01"},
                         new int[] {R.id.commentorText,R.id.dateText03,R.id.commentText01});
-        lv.setAdapter(mSimpleAdapter);//ÎªListView°ó¶¨ÊÊÅäÆ÷
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-                setTitle("Äãµã»÷ÁËµÚ"+arg2+"ĞĞÆÀÂÛ");//ÉèÖÃ±êÌâÀ¸ÏÔÊ¾µã»÷µÄĞĞ
-            }
-        });
+        lv.setAdapter(mSimpleAdapter);//ä¸ºListViewç»‘å®šé€‚é…å™¨
     }
 
     @Override
     protected void initValue() {
-        /*ÔÚÊı×éÖĞ´æ·ÅÊı¾İ*/
-        ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String,Object>>();
-        for(int i=0;i<10;i++)
+        /*åœ¨æ•°ç»„ä¸­å­˜æ”¾æ•°æ®*/
+        for(int i=0;i<5;i++)
         {
             HashMap<String, Object> map = new HashMap<String, Object>();
-            map.put("commentorText", "ÖÜ½Ü±¦");
+            map.put("commentorText", "æå››");
             map.put("dateText03","2015-07-28    20:58:33");
-            map.put("commentText01", "ºÃºÃºÃ£¬ËµµÄÕæÌØÃ´ºÃ£¡£¡£¡´ÓÀ´Ã»Ìı¹ıÕâÃ´ÇåĞÂÍÑË×µÄ»°£¬µõµõµõ£¡£¡");
+            map.put("commentText01", "å¥½å¥½å¥½ï¼Œè¯´çš„çœŸç‰¹ä¹ˆå¥½ï¼ï¼ï¼ä»æ¥æ²¡å¬è¿‡è¿™ä¹ˆæ¸…æ–°è„±ä¿—çš„è¯ï¼ŒåŠåŠåŠï¼ï¼");
             listItem.add(map);
         }
     }

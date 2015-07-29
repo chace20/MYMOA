@@ -55,10 +55,10 @@ public class NewsReleaseActivity extends BaseActivity{
             @Override
             public void onSuccess(RequestStatus result) {
                 if (result.code == 200) {
-                    Toast.makeText(NewsReleaseActivity.this, "发布新闻成功",
+                    Toast.makeText(NewsReleaseActivity.this, "鍙戝竷鏂伴椈鎴愬姛",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(NewsReleaseActivity.this, "发布新闻失败",
+                    Toast.makeText(NewsReleaseActivity.this, "鍙戝竷鏂伴椈澶辫触",
                             Toast.LENGTH_SHORT).show();
                 }
             }

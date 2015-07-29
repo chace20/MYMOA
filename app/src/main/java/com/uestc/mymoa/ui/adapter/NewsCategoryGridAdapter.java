@@ -4,13 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.uestc.mymoa.R;
-import com.uestc.mymoa.ui.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,9 +55,9 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
         TextView newsCategoryText = (TextView) convertView.findViewById(R.id.newsCategoryText);
         newsCategoryText.setText(list.get(position));
 
-        AdapterView.LayoutParams params = new AdapterView.LayoutParams(
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3,
-                (((MainActivity) context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
+        AbsListView.LayoutParams params = new GridView.LayoutParams(
+                GridView.LayoutParams.MATCH_PARENT,
+                ((context).getResources().getDisplayMetrics().widthPixels - 4 * 3) / 3);
 
         convertView.setLayoutParams(params);
         return convertView;
@@ -65,10 +65,10 @@ public class NewsCategoryGridAdapter extends BaseAdapter {
 
     private List<String> getListData() {
         List<String> list = new ArrayList<>();
-        list.add("本地");
-        list.add("娱乐");
-        list.add("科技");
-        list.add("亮黄色");
+        list.add("娱乐");//id -- 1
+        list.add("军事");//2
+        list.add("科技");//2
+        list.add("体育");//2
         return list;
     }
 }

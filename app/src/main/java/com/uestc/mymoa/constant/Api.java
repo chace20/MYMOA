@@ -4,7 +4,7 @@ package com.uestc.mymoa.constant;
  * Created by chao on 2015/7/25.
  */
 public class Api {
-    private static final String BASE = "http://192.168.3.144:3000/api";
+    private static final String BASE = "http://192.168.23.1/api";
 
     private static final String USERS = "/users";
     private static final String DOC = "/doc";

@@ -1,5 +1,7 @@
 package com.uestc.mymoa.ui;
 
+import android.content.Intent;
+import android.graphics.Rect;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -18,12 +21,15 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.view.annotation.ViewInject;
+import com.uestc.mymoa.R;
+import com.uestc.mymoa.constant.BroadCastAction;
+import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
 import com.uestc.mymoa.ui.fragment.ContactFragment;
 import com.uestc.mymoa.ui.fragment.HomeFragment;
-import com.uestc.mymoa.ui.adapter.MainFragmentPagerAdapter;
 import com.uestc.mymoa.ui.fragment.ManageFragment;
-import com.uestc.mymoa.ui.fragment.MessageFragment;
-import com.uestc.mymoa.R;
+import com.uestc.mymoa.ui.fragment.MailFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,8 +67,19 @@ public class MainActivity extends BaseActivity {
     private MainFragmentPagerAdapter fragmentPagerAdapter;
     private List<Fragment> fragmentList;
 
+    @ViewInject(R.id.homeImage)
+    private ImageView homeImage;
+    @ViewInject(R.id.messageImage)
+    private ImageView messageImage;
+    @ViewInject(R.id.contactImage)
+    private ImageView contactImage;
+    @ViewInject(R.id.manageIamge)
+    private ImageView manageImage;
+
+
     @Override
     protected void initLayout() {
+        ViewUtils.inject(this);
         homeLinear = (LinearLayout) findViewById(R.id.homeLinear);
         messageLinear = (LinearLayout) findViewById(R.id.messageLinear);
         contactLinear = (LinearLayout) findViewById(R.id.contactLinear);
@@ -75,6 +92,7 @@ public class MainActivity extends BaseActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewpager = (ViewPager) findViewById(R.id.viewpager);
+
     }
 
     @Override
@@ -138,15 +156,15 @@ public class MainActivity extends BaseActivity {
     protected void initValue() {
         fragmentList = new ArrayList<>();
         fragmentList.add(new HomeFragment());
-        fragmentList.add(new MessageFragment());
+        fragmentList.add(new MailFragment());
         fragmentList.add(new ContactFragment());
         fragmentList.add(new ManageFragment());
         fragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
 
         viewpager.setAdapter(fragmentPagerAdapter);
 
-        toolbar.setTitle("Main");
         setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         homeText.setTextColor(getResources().getColor(R.color.colorPrimary));
     }
@@ -161,35 +179,34 @@ public class MainActivity extends BaseActivity {
 
         if (!isOperationMenuShowed) {
 
-            operationMenu = new PopupWindow(view, getWindow().getDecorView().getWidth() / 3, ViewGroup.LayoutParams.WRAP_CONTENT);
+            operationMenu = new PopupWindow(view, getWindow().getDecorView().getWidth()*1 / 2, ViewGroup.LayoutParams.WRAP_CONTENT);
             operationMenu.setAnimationStyle(R.style.popWindowAnimation);
-            operationMenu.showAsDropDown(toolbar, 0, 0, Gravity.RIGHT);
+            Rect frame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+            int statusBarHeight = frame.top;
+            operationMenu.showAtLocation(viewpager, Gravity.NO_GRAVITY, getWindow().getDecorView().getWidth()*15/32, toolbar.getHeight() + statusBarHeight);
+
             isOperationMenuShowed = true;
 
-
             ListView operationMainList = (ListView) view.findViewById(R.id.operationMainList);
-
             operationMainList.setAdapter(new SimpleAdapter(MainActivity.this, getOperations(), R.layout.item_operation_menu,
                     new String[]{"operation"}, new int[]{R.id.operationText}));
-
 
             operationMainList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch (position) {
                         case 0:
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, PostAddActivity.class));
                             break;
                         case 1:
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
+                            startActivity(new Intent(MainActivity.this, MailSendNewActivity.class));
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 3:
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
-                            break;
-                        case 4:
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                     }
@@ -197,7 +214,6 @@ public class MainActivity extends BaseActivity {
                     isOperationMenuShowed = false;
                 }
             });
-
         }
 
     }
@@ -208,9 +224,7 @@ public class MainActivity extends BaseActivity {
 
         list.add("发布公告");
         list.add("发布新闻");
-        list.add("新建内部短信");
-        list.add("新建手机短信");
-        list.add("新建联系人");
+        list.add("发送消息");
 
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map = new HashMap<>();
@@ -224,31 +238,39 @@ public class MainActivity extends BaseActivity {
     private void setBottomTextColor(int previousPagerPosition, int currentPagerPosition) {
         switch (previousPagerPosition) {
             case CURRENT_IS_HOME:
-                homeText.setTextColor(getResources().getColor(R.color.white));
+                homeImage.setImageResource(R.drawable.ic_main_home_normal);
+                homeText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_MESSAGE:
-                messageText.setTextColor(getResources().getColor(R.color.white));
+                messageImage.setImageResource(R.drawable.ic_main_mail_normal);
+                messageText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_CONTACT:
-                contactText.setTextColor(getResources().getColor(R.color.white));
+                contactImage.setImageResource(R.drawable.ic_main_contact_normal);
+                contactText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
             case CURRENT_IS_MANAGE:
-                manageText.setTextColor(getResources().getColor(R.color.white));
+                manageImage.setImageResource(R.drawable.ic_main_manage_normal);
+                manageText.setTextColor(getResources().getColor(R.color.text_black_54));
                 break;
         }
 
         switch (currentPagerPosition) {
             case CURRENT_IS_HOME:
-                homeText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                homeImage.setImageResource(R.drawable.ic_main_home_focus);
+                homeText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case CURRENT_IS_MESSAGE:
-                messageText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                messageImage.setImageResource(R.drawable.ic_main_mail_focus);
+                messageText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case CURRENT_IS_CONTACT:
-                contactText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                contactImage.setImageResource(R.drawable.ic_main_contact_focus);
+                contactText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
             case CURRENT_IS_MANAGE:
-                manageText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                manageImage.setImageResource(R.drawable.ic_main_manage_focus);
+                manageText.setTextColor(getResources().getColor(R.color.colorAccent));
                 break;
         }
 
@@ -284,6 +306,9 @@ public class MainActivity extends BaseActivity {
             operationMenu.dismiss();
             isOperationMenuShowed = false;
         } else {
+            Intent intent = new Intent();
+            intent.setAction(BroadCastAction.ACTION_FINISH);
+            sendBroadcast(intent);
             super.onBackPressed();
         }
     }

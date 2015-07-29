@@ -3,19 +3,15 @@ package com.uestc.mymoa.ui.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.uestc.mymoa.R;
-import com.uestc.mymoa.ui.NewsListActivity;
+import com.uestc.mymoa.ui.PostDetailActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,10 +56,9 @@ public class PostAdapter extends PagerAdapter {
             public void onClick(View v) {
                 //TODO 添加跳转到post详情页
                 int id = (int)((double)map.get("postid")+0.5);
-                Toast.makeText(context,"点击的postid是"+id,Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, PostListActivity.class);
-//                intent.putExtra("postid", map.get("postid").toString());
-//                startActivity(intent);
+                Intent intent = new Intent(context, PostDetailActivity.class);
+                intent.putExtra("postid", map.get("postid").toString());
+                context.startActivity(intent);
             }
         });
 

@@ -3,6 +3,7 @@ package com.uestc.mymoa.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.BaseAdapter;
@@ -59,16 +60,6 @@ public class FileManageDetailActivity extends BaseActivity{
         return super.onCreateOptionsMenu(menu);
     }
 
-    public static Intent createInent(Context context,int file_myid){
-
-        Intent intent=new Intent();
-
-        intent.setClass(context, FileManageDetailActivity.class);
-
-        return intent;
-    }
-
-
     /**
      * */
 
@@ -99,6 +90,7 @@ public class FileManageDetailActivity extends BaseActivity{
 
             @Override
             public void onSuccess(Map<String,Object> result) {
+                Log.e("activity result--","--"+result.get("uname"));
                 uname.setText(result.get("uname").toString());
                 content.setText(result.get("content").toString());
                 time.setText(result.get("altertime").toString());

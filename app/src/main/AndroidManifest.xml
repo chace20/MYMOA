@@ -34,7 +34,7 @@
             android:name=".ui.UserSigninActivity"
             android:label="注册"></activity>
         <activity android:name=".ui.FileManageActivity"
-            android:label="文档列表">
+            android:label="文档管理">
         </activity>
         <activity android:name=".ui.FileManageAddActivity"
             android:label="新建文档">
@@ -43,7 +43,7 @@
             android:label="文档详情">
         </activity>
         <activity android:name=".ui.FileManageSearchActivity"
-            android:label="文档搜索">
+            android:label="搜索文档">
         </activity>
         <activity android:name=".ui.FileManageEditActivity"
             android:label="编辑文档">
@@ -62,12 +62,9 @@
             android:label="新闻列表"></activity>
         <activity
             android:name=".ui.ContactGroupListActivity"
-<<<<<<< HEAD
-            android:label="我的群租"></activity>
+            android:label="我的群组"></activity>
         <activity android:name=".ui.NewsContentActivity"
             android:label="新闻详情"></activity>
-=======
-            android:label="我的群组"></activity>
 
         <activity
             android:name=".ui.ContactGroupDetailActivity"
@@ -75,7 +72,6 @@
         <activity
             android:name=".ui.ContactDetailActivity"
             android:label="联系人信息"></activity>
->>>>>>> 7e73fe1b8604c8aa190ded8b331f9e542704c36c
     </application>
 
 

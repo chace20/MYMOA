@@ -1,11 +1,11 @@
 package com.uestc.mymoa.ui;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +25,7 @@ import com.uestc.mymoa.io.DocDelDocHanlder;
 import com.uestc.mymoa.io.DocQueryDocListHandler;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.model.DocContent;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -81,7 +82,7 @@ h();
 
     @Override
     protected void initLayout() {
-
+        actionbar.setDisplayHomeAsUpEnabled(true);
         noteList=(ListView)findViewById(R.id.lv_filemanage_file);
 
     }
@@ -97,7 +98,9 @@ h();
  * 获取文档id
  * */
                 Intent intent=new Intent(FileManageActivity.this,FileManageDetailActivity.class);
-                intent.putExtra("docid",(String)fileListListmap.get(position).get("docid"));
+
+                int docid = (int)((double)fileListListmap.get(position).get("docid")+0.5);
+                intent.putExtra("docid",docid);
                 startActivity(intent);
             }
         });
@@ -110,15 +113,18 @@ h();
             public boolean onItemLongClick(AdapterView<?> parent, View view,final int position, long id) {
 
                 new AlertDialog.Builder(FileManageActivity.this)
-                        .setTitle("delete?")
-                        .setPositiveButton("Y", new DialogInterface.OnClickListener() {
+                        .setTitle("确定删除？")
+                        .setPositiveButton("删除", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 /**
                                  * 删除操作
                                  * */
                                 RequestParams params=new RequestParams();
-                                params.addBodyParameter("docid",(String)fileListListmap.get(position).get("docid"));
+
+                                int id = (int)((double)fileListListmap.get(position).get("docid")+0.5);
+
+                                params.addBodyParameter("docid", id+"");
                                 new DocDelDocHanlder().process(params, new IOCallback() {
                                     @Override
                                     public void onStart() {
@@ -132,19 +138,22 @@ h();
 
                                     @Override
                                     public void onSuccess(Object result) {
-
-                                            Toast.makeText(FileManageActivity.this,"执行中",Toast.LENGTH_SHORT).show();
+                                        if(((RequestStatus)result).code==200){
+                                            Toast.makeText(FileManageActivity.this,"删除成功",Toast.LENGTH_SHORT).show();
+                                        }else{
+                                            Toast.makeText(FileManageActivity.this,"删除失败",Toast.LENGTH_SHORT).show();
+                                        }
                                         resume();
                                     }
 
                                     @Override
                                     public void onFailure(String error) {
-
+                                        Toast.makeText(FileManageActivity.this,"网络错误."+error,Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
                         })
-                        .setNegativeButton("N", null).create()
+                        .setNegativeButton("取消", null).create()
                         .show();
                 return true;
             }

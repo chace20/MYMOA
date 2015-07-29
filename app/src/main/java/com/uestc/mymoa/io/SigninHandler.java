@@ -8,37 +8,44 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.uestc.mymoa.constant.Api;
-import com.uestc.mymoa.io.model.FileneedStatus;
 import com.uestc.mymoa.io.model.RequestStatus;
 
 /**
- * Created by hui on 2015/7/28.
+ * Created by chao on 2015/7/27.
  */
-public class FileManageHandler extends IOHandler{
-    protected IOCallback<RequestStatus> filemaincallback;
-    public void process(RequestParams params,IOCallback ioCallback){
-        this.filemaincallback=ioCallback;
+public class SigninHandler extends IOHandler {
+    protected IOCallback<RequestStatus> callback;
+
+    @Override
+    public void process(RequestParams params, IOCallback ioCallback) {
+        this.callback = ioCallback;
+
         HttpUtils http = new HttpUtils();
         http.send(HttpRequest.HttpMethod.POST,
-                Api.Doc.queryDocList,
+                Api.Users.addUser,
                 params,
                 new RequestCallBack<String>() {
-                    public void onStart(){
-                        filemaincallback.onStart();
+
+                    @Override
+                    public void onStart() {
+                        callback.onStart();
                     }
-                    public void onLoading(long total, long current, boolean isUploading){
+
+                    @Override
+                    public void onLoading(long total, long current, boolean isUploading) {
 
                     }
+
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
                         Gson gson = new Gson();
-                        FileneedStatus status = gson.fromJson(responseInfo.result,  FileneedStatus.class);
-                        filemaincallback.onSuccess(status);
+                        RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);
+                        callback.onSuccess(status);
                     }
 
                     @Override
-                    public void onFailure(HttpException e, String s) {
-                        filemaincallback.onFailure(s);
+                    public void onFailure(HttpException error, String msg) {
+                        callback.onFailure(msg);
                     }
                 });
     }

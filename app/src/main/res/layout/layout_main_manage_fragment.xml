@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/docManageLinear"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"
@@ -26,6 +27,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/personalCenterLinear"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:gravity="center_vertical"

@@ -8,6 +8,7 @@
         android:id="@+id/myGroupLinear"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
+        android:clickable="true"
         android:gravity="center_vertical">
 
         <TextView

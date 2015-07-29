@@ -19,14 +19,16 @@ public class PostDetailActivity extends BaseActivity {
 
     private TextView postTitleText;
     private TextView postUnameText;
-    private TextView postTimeText;
+    private TextView postStartTimeText;
+    private TextView postEndTimeText;
     private TextView postContentText;
 
     @Override
     protected void initLayout() {
         postTitleText = (TextView) findViewById(R.id.postTitleText);
         postUnameText = (TextView) findViewById(R.id.postUnameText);
-        postTimeText = (TextView) findViewById(R.id.postTimeText);
+        postStartTimeText = (TextView) findViewById(R.id.postStartTimeText);
+        postEndTimeText = (TextView) findViewById(R.id.postEndTimeText);
         postContentText = (TextView) findViewById(R.id.postContentText);
     }
 
@@ -67,7 +69,8 @@ public class PostDetailActivity extends BaseActivity {
                 } else {
                     postTitleText.setText(map.get("title"));
                     postUnameText.setText(map.get("uname"));
-                    postTimeText.setText(map.get("endtime"));
+                    postStartTimeText.setText(map.get("starttime"));
+                    postEndTimeText.setText(map.get("endtime"));
                     postContentText.setText(map.get("contemt"));
                 }
             }

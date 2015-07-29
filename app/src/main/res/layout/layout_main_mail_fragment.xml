@@ -6,10 +6,9 @@
     android:orientation="vertical">
 
     <ListView
-
-        android:dividerHeight="1dp"
         android:id="@+id/mailHistoryList"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></ListView>
+        android:layout_height="fill_parent"
+        android:dividerHeight="1dp"></ListView>
 
 </LinearLayout>

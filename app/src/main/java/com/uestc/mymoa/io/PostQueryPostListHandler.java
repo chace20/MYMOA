@@ -1,6 +1,9 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -15,13 +18,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by nothisboy on 2015/7/28.
  */
-public class PostQueryPostList extends IOHandler {
+public class PostQueryPostListHandler extends IOHandler {
 
     protected IOCallback callback;
 
@@ -41,25 +46,14 @@ public class PostQueryPostList extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                List<PostContent> list = new ArrayList<PostContent>();
-                String result = String.valueOf(responseInfo);
+                String result = String.valueOf(responseInfo.result);
                 if (result.indexOf("[") != -1) {
-                    try {
-                        JSONArray jsonArray = new JSONArray(responseInfo);
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            PostContent postContent = new PostContent();
-                            postContent.postid = (String) jsonObject.get("postid");
-                            postContent.title = (String) jsonObject.get("title");
-                            postContent.uname = (String) jsonObject.get("uname");
-                            postContent.starttime = (String) jsonObject.get("starttime");
-                            postContent.endtime = (String) jsonObject.get("endtime");
-                            list.add(postContent);
-                        }
-                        callback.onSuccess(list);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    Type listType = new TypeToken<List<HashMap<String, Object>>>() {
+                    }.getType();
+                    Gson gson = new Gson();
+
+                    List<HashMap<String, Object>> list = gson.fromJson(responseInfo.result, listType);
+                    callback.onSuccess(list);
                 } else {
                     Gson gson = new Gson();
                     RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);

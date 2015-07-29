@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,18 +45,23 @@ public class FileManageActivity extends BaseActivity{
     private String file_note_title;
     private List<Map<String,Object>> fileListListmap=new ArrayList<>();
     private BaseAdapter filelistAdapter;
+    private void h(){
+        Log.i("err","bdbdbdbdbdbdb");
+    }
+
     private void resume(){
         RequestParams params=new RequestParams();
-
+        Log.i("err","resum1");
         new DocQueryDocListHandler().process(params, new IOCallback<Map<String,Object>>() {
             @Override
             public void onStart() {
-
+h();
             }
 
             @Override
             public void onSuccess(List<Map<String,Object>> result) {
                 fileListListmap=result;
+                Log.i("err",""+"dddddddd");
                 getAdapter(fileListListmap);
                 /**reflash*/
                 reFlash();
@@ -63,19 +69,21 @@ public class FileManageActivity extends BaseActivity{
 
             @Override
             public void onSuccess(Map<String,Object> result) {
-
+                Log.i("err","success");
             }
 
             @Override
             public void onFailure(String error) {
-
+                Log.i("err","failure");
             }
         });
     }
 
     @Override
     protected void initLayout() {
+
         noteList=(ListView)findViewById(R.id.lv_filemanage_file);
+
     }
     @Override
     protected void initListener() {
@@ -99,7 +107,7 @@ public class FileManageActivity extends BaseActivity{
          * */
         noteList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view,final int position, long id) {
 
                 new AlertDialog.Builder(FileManageActivity.this)
                         .setTitle("delete?")
@@ -144,12 +152,15 @@ public class FileManageActivity extends BaseActivity{
     }
 
     private BaseAdapter getAdapter(List<Map<String,Object>> list){
-        filelistAdapter=new SimpleAdapter(this,list,R.layout.layout_filemanage_list_item,new String[]{"docContent.title"},new int[]{R.id.file_lv_tv_text});
+        Log.i("err","adapter");
+        filelistAdapter=new SimpleAdapter(this,list,R.layout.layout_filemanage_list_item,new String[]{"title"},new int[]{R.id.file_lv_tv_text});
         return filelistAdapter;
     }
     @Override
     protected void initValue() {
+        Log.i("err","initvalue");
         resume();
+        Log.i("err","initvalue2");
     }
     @Override
     protected int setRootView() {

@@ -92,8 +92,8 @@ public class UserLoginActivity extends BaseActivity{
 
         final String phone = phoneEdit.getText().toString();
         String pass = passEdit.getText().toString();
-        params.addQueryStringParameter("phone", phone);
-        params.addQueryStringParameter("password",pass);
+        params.addBodyParameter("phone", phone);
+        params.addBodyParameter("password",pass);
 
         handler.process(params, new IOCallback<RequestStatus>() {
             @Override
@@ -116,6 +116,7 @@ public class UserLoginActivity extends BaseActivity{
                     Id.userId =phone;
 
                     startActivity(new Intent(UserLoginActivity.this, MainActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(UserLoginActivity.this, "手机号或者密码错误,请重新输入", Toast.LENGTH_SHORT).show();
                 }

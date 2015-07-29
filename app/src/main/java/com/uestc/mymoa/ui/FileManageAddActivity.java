@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.common.util.ToolUtil;
+import com.uestc.mymoa.constant.Id;
 import com.uestc.mymoa.io.DocAddDocHandler;
 import com.uestc.mymoa.io.IOCallback;
 
@@ -59,8 +61,9 @@ public class FileManageAddActivity extends BaseActivity{
         final String title=file_add_title.getText().toString();
         String text=file_add_text.getText().toString();
         params.addQueryStringParameter("title",title);
-        params.addQueryStringParameter("text",text);
-
+        params.addQueryStringParameter("content",text);
+        params.addQueryStringParameter("uid", Id.userId);
+        params.addQueryStringParameter("altertime", ToolUtil.getCurrentTime(ToolUtil.TIME_COMMON));
         new DocAddDocHandler().process(params, new IOCallback() {
             @Override
             public void onStart() {

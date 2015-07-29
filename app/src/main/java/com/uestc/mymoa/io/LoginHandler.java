@@ -1,5 +1,7 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -38,6 +40,7 @@ public class LoginHandler extends IOHandler {
 
                     @Override
                     public void onSuccess(ResponseInfo<String> responseInfo) {
+                        Log.e("my","resultJson--"+responseInfo.result);
                         Gson gson = new Gson();
                         RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);
                         callback.onSuccess(status);

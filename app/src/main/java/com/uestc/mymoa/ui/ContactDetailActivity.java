@@ -5,36 +5,103 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.io.ContactHandler;
+import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by SinLapis on 2015/7/26.
  */
-public class ContactDetailActivity extends Activity {
+public class ContactDetailActivity extends BaseActivity {
 
     private TextView nameText;
     private TextView phonenumText;
     private Button delcontactButton;
-    private int uid;
+    private String uid;
+    private HashMap<String, Object> map = new HashMap<String, Object>();
 
-    private HashMap<String, Object> getData(){
-        //TODO
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        Intent intent = getIntent();
-        uid = intent.getIntExtra("uid", -1);
-        return map;
+    private void getContactDetail(){
+
+        RequestParams params = new RequestParams();
+
+        params.addQueryStringParameter("uid", uid);
+
+        new ContactHandler().getContactDetail(params, new IOCallback<HashMap<String, Object>>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(List<HashMap<String, Object>> result) {
+
+            }
+
+            @Override
+            public void onSuccess(HashMap<String, Object> result) {
+                map = result;
+                nameText.setText(map.get("uname").toString());
+                phonenumText.setText(map.get("uid").toString());
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
+    private void delContact(){
+
+        RequestParams params = new RequestParams();
+
+        params.addBodyParameter("uid", uid);
+
+        new ContactHandler().delContact(params, new IOCallback<RequestStatus>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(List<RequestStatus> result) {
+
+            }
+
+            @Override
+            public void onSuccess(RequestStatus result) {
+                if (result.code == 200) {
+                    Toast.makeText(ContactDetailActivity.this, "删除联系人成功",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ContactDetailActivity.this, "删除联系人失败",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        setContentView(R.layout.layout_contactdetail);
+        super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        uid = intent.getStringExtra("uid");
         nameText = (TextView) findViewById(R.id.nameText);
         phonenumText = (TextView) findViewById(R.id.phonenumText);
         delcontactButton = (Button) findViewById(R.id.delcontactButton);
@@ -49,21 +116,38 @@ public class ContactDetailActivity extends Activity {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO
+                                delContact();
+                                Intent intent = new Intent(ContactDetailActivity.this, ContactGroupDetailActivity.class);
+                                intent.putExtra("uid", uid);
+                                setResult(2, intent);
+                                finish();
                             }
                         })
                         .setNegativeButton("取消", null)
                         .show();
             }
         });
+        getContactDetail();
     }
+
     @Override
-    protected void onResume() {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map = getData();
-        if(Integer.parseInt(map.get("uid").toString()) != -1){
-            nameText.setText(map.get("uname").toString());
-            phonenumText.setText(map.get("phonenum").toString());
-        }
+    protected void initLayout() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
     }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initValue() {
+
+    }
+
+    @Override
+    protected int setRootView() {
+        return R.layout.layout_contactdetail;
+    }
+
 }

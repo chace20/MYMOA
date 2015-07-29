@@ -24,7 +24,6 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="32dp"
-        android:entries="@array/news_category"
         android:layout_margin="8dp"
         android:gravity="center"
         android:id="@+id/newsReleaseCategorySpinner"

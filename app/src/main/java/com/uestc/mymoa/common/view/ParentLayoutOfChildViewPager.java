@@ -1,4 +1,4 @@
-package com.uestc.mymoa;
+package com.uestc.mymoa.common.view;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

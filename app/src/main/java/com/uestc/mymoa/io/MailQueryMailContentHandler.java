@@ -35,7 +35,7 @@ public class MailQueryMailContentHandler extends IOHandler {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                Type type = new TypeToken<HashMap<String, Object>>() {
+                Type type = new TypeToken<HashMap<String, String>>() {
                 }.getType();
                 Gson gson = new Gson();
                 HashMap<String, Object> map = gson.fromJson(responseInfo.result, type);

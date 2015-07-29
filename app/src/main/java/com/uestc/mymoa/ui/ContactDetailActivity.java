@@ -102,7 +102,7 @@ public class ContactDetailActivity extends BaseActivity {
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("uid");
-        nameText = (TextView) findViewById(R.id.nameText);
+        nameText = (TextView) findViewById(R.id.unameText);
         phonenumText = (TextView) findViewById(R.id.phonenumText);
         delcontactButton = (Button) findViewById(R.id.delcontactButton);
 

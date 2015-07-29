@@ -132,9 +132,19 @@ public class ContactGroupDetailActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(requestCode == 2){
-            list.clear();
-            getGroupDetailList();
+        if(resultCode == 2){
+            String uid = data.getStringExtra("uid");
+            int i = 0;
+            for(HashMap<String, Object> map : list){
+
+                if(map.get("uid").equals(uid)){
+
+                    list.remove(i);
+                    refreshAdapter();
+                    Log.e("uid", "yes");
+                }
+                i++;
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

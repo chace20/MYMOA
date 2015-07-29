@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/grey"
     android:orientation="vertical">
 
-    <com.uestc.mymoa.ParentLayoutOfChildViewPager
+    <com.uestc.mymoa.common.view.ParentLayoutOfChildViewPager
         android:id="@+id/parentOfViewPagerLinear"
         android:layout_width="fill_parent"
         android:layout_height="200dp"
@@ -13,6 +14,11 @@
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/postViewPager"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"></android.support.v4.view.ViewPager>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -31,48 +37,51 @@
                         android:layout_width="8dp"
                         android:layout_height="2dp"
                         android:layout_margin="4dp"
-                        android:background="@color/white" />
+                        android:background="@color/whiteDark" />
 
                     <ImageView
                         android:id="@+id/indicatorImage2"
                         android:layout_width="8dp"
                         android:layout_height="2dp"
                         android:layout_margin="4dp"
-                        android:background="@color/white" />
+                        android:background="@color/whiteAlpha" />
 
                     <ImageView
                         android:id="@+id/indicatorImage3"
                         android:layout_width="8dp"
                         android:layout_height="2dp"
                         android:layout_margin="4dp"
-                        android:background="@color/white" />
+                        android:background="@color/whiteAlpha" />
 
                     <ImageView
                         android:id="@+id/indicatorImage4"
                         android:layout_width="8dp"
                         android:layout_height="2dp"
                         android:layout_margin="4dp"
-                        android:background="@color/white" />
+                        android:background="@color/whiteAlpha" />
+
+                    <ImageView
+                        android:id="@+id/indicatorImage5"
+                        android:layout_width="8dp"
+                        android:layout_height="2dp"
+                        android:layout_margin="4dp"
+                        android:background="@color/whiteAlpha" />
 
                 </LinearLayout>
             </RelativeLayout>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/postViewPager"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
-            </android.support.v4.view.ViewPager>
+
         </FrameLayout>
-    </com.uestc.mymoa.ParentLayoutOfChildViewPager>
+    </com.uestc.mymoa.common.view.ParentLayoutOfChildViewPager>
 
     <GridView
         android:id="@+id/newsCategoryGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:horizontalSpacing="1dp"
         android:numColumns="3"
         android:scrollbars="none"
-        android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp" />
 
 </LinearLayout>

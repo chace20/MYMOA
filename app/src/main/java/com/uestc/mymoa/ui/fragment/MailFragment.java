@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,6 @@ import java.util.Map;
 public class MailFragment extends Fragment {
 
     private ListView mailHistoryList;
-    //    private TextView mailUnameText;
-//    private TextView mailTimeText;
-//    private TextView mailContentText;
     private MailQueryMailListHandler handler;
     private List<Map<String, Object>> mailList;
 
@@ -60,7 +58,7 @@ public class MailFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), MailItemContentActivity.class);
-                intent.putExtra("mailid", (String) mailList.get(position).get("mailid"));
+                intent.putExtra("mailid", String.valueOf(mailList.get(position).get("mailid")));
                 startActivity(intent);
             }
         });
@@ -77,10 +75,11 @@ public class MailFragment extends Fragment {
 
             @Override
             public void onSuccess(List result) {
-                mailHistoryList.setAdapter(new SimpleAdapter(getActivity(), result, R.layout.item_mail_history,
-                        new String[]{"fromuid", "time", "content"},
-                        new int[]{R.id.mailUnameText, R.id.mailTimeText, R.id.mailContentText}));
                 mailList = result;
+                mailHistoryList.setAdapter(new SimpleAdapter(getActivity(), mailList, R.layout.item_mail_history,
+                        new String[]{"name", "time", "content"},
+                        new int[]{R.id.mailUnameText, R.id.mailTimeText, R.id.mailContentText}));
+
             }
 
             @Override
@@ -92,6 +91,14 @@ public class MailFragment extends Fragment {
                 Toast.makeText(getActivity(), "internet error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String getNameById(){
+        String name = "";
+
+        
+
+        return name;
     }
 
 }

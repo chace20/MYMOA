@@ -1,5 +1,7 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
@@ -52,6 +54,7 @@ public class PostQueryPostListHandler extends IOHandler {
 
                     List<HashMap<String, Object>> list = gson.fromJson(responseInfo.result, listType);
                     callback.onSuccess(list);
+
                 } else {
                     Gson gson = new Gson();
                     RequestStatus status = gson.fromJson(responseInfo.result, RequestStatus.class);

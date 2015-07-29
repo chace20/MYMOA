@@ -49,9 +49,6 @@
         <activity android:name=".ui.FileManageEditActivity"
             android:label="编辑文档">
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".ui.PostAddActivity"></activity>
-=======
         <activity
             android:name=".ui.PostAddActivity"
             android:label="发布公告"></activity>
@@ -79,7 +76,6 @@
         <activity
             android:name=".ui.ProfileActivity"
             android:label="个人中心"></activity>
->>>>>>> 7eb7bf72b69b64a8cb2c6bd98428491eafb89974
     </application>
 
 

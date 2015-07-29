@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="news_category">
+        <item>娱乐</item>
+        <item>军事</item>
+        <item>科技</item>
+        <item>体育</item>
+    </string-array>
+</resources>

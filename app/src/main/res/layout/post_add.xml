@@ -91,30 +91,7 @@
             android:layout_toRightOf="@+id/button3"
             android:layout_marginTop="5dp"/>
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text5"
-            android:text="添加附件:"
-            android:textSize="30sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/select_file"
-            android:text="选择文件"
-            android:textSize="20sp"
-            android:layout_below="@+id/text5"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"/>
 
-    </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -124,12 +101,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:id="@+id/checkbox1" />
+        android:id="@+id/checkbox" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text6"
-            android:layout_toRightOf="@+id/checkbox1"
+            android:layout_toRightOf="@+id/checkbox"
             android:layout_marginTop="5dp"
             android:text="内部短信提醒"
             android:textSize="20sp"/>

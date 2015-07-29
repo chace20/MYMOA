@@ -6,4 +6,10 @@
     <string name="more">more</string>
     <string name="delcontactButton">删除联系人</string>
     <string name="action_addgroup">添加联系人群组</string>
+    <string name="news_comment">评论</string>
+    <string name="news_add_title">标题</string>
+    <string name="news_add_category">类别</string>
+    <string name="news_add_content">内容</string>
+    <string name="news_add_release">发布</string>
+
 </resources>

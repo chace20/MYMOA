@@ -1,5 +1,7 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -32,6 +34,7 @@ public class DocQueryDocContentHandler extends IOHandler {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 Gson gson = new Gson();
+                Log.e("handler result--", responseInfo.result);
                 DocContent docContent = gson.fromJson(responseInfo.result, DocContent.class);
                 callback.onSuccess(docContent);
             }

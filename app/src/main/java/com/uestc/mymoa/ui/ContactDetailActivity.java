@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.common.view.InputDialog;
 import com.uestc.mymoa.io.ContactHandler;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.model.RequestStatus;
@@ -110,7 +111,7 @@ public class ContactDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                new AlertDialog.Builder(ContactDetailActivity.this)
+                new InputDialog.Builder(ContactDetailActivity.this)
                         .setTitle("删除联系人")
                         .setMessage("确定要删除该联系人吗？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {

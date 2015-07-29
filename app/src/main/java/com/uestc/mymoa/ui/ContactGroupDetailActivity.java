@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.common.view.InputDialog;
 import com.uestc.mymoa.io.ContactHandler;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.model.RequestStatus;
@@ -40,7 +41,6 @@ public class ContactGroupDetailActivity extends BaseActivity {
         RequestParams params = new RequestParams();
 
         params.addQueryStringParameter("groupid", groupid);
-        Log.e("null", "groupid2:" + groupid);
 
         new ContactHandler().getGroupDetailList(params, new IOCallback<HashMap<String, Object>>() {
             @Override
@@ -103,7 +103,7 @@ public class ContactGroupDetailActivity extends BaseActivity {
     private void refreshAdapter(){
         groupdetailList.setAdapter(new SimpleAdapter(ContactGroupDetailActivity.this,
                 list, R.layout.item_contact,
-                new String[]{"uid"}, new int[]{R.id.itemText}));
+                new String[]{"uname"}, new int[]{R.id.itemText}));
     }
 
     @Override
@@ -141,7 +141,6 @@ public class ContactGroupDetailActivity extends BaseActivity {
 
                     list.remove(i);
                     refreshAdapter();
-                    Log.e("uid", "yes");
                 }
                 i++;
             }
@@ -179,23 +178,21 @@ public class ContactGroupDetailActivity extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_add) {
 
-            final EditText addContactEdit = new EditText(ContactGroupDetailActivity.this);
-            addContactEdit.setHint("请输入联系人手机号");
 
-            new  AlertDialog.Builder(ContactGroupDetailActivity.this)
-                    .setTitle("新建群组联系人")
-                    .setView(addContactEdit)
+            final InputDialog inputDialog = new  InputDialog(ContactGroupDetailActivity.this);
+            inputDialog.setInputEditHint("请输入联系人手机号");
+                    inputDialog.buider.setTitle("新建群组联系人")
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
-                            addGroupContact(addContactEdit.getText().toString());
+                            addGroupContact(inputDialog.getInputEditText());
                             list.clear();
                             getGroupDetailList();
                         }
                     })
                     .setNegativeButton("取消", null)
-                    .show();
+                            .show();
         }
         return super.onOptionsItemSelected(item);
     }

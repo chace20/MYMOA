@@ -194,8 +194,6 @@ public class ContactHandler extends IOHandler{
                     }
                 });
     }
-    public void addContact(RequestParams params, IOCallback ioCallback){
-    }
     public void addGroupContact(RequestParams params, IOCallback ioCallback) {
 
         final IOCallback<RequestStatus> callback = ioCallback;
@@ -225,6 +223,38 @@ public class ContactHandler extends IOHandler{
 
                     @Override
                     public void onFailure(HttpException error, String msg) {
+                        callback.onFailure(msg);
+                    }
+                });
+    }
+    public void getContactList(IOCallback ioCallback){
+
+        final IOCallback<HashMap<String,Object>> callback = ioCallback;
+
+        HttpUtils http = new HttpUtils();
+        http.send(HttpRequest.HttpMethod.GET,
+                Api.Contact.queryContactList,
+                new RequestCallBack<String>() {
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                    }
+
+                    @Override
+                    public void onSuccess(ResponseInfo<String> responseInfo) {
+                        Type listType = new TypeToken<List<HashMap<String, Object>>>() {
+                        }.getType();
+                        Gson gson = new Gson();
+                        Log.e("null", "res:"+responseInfo.result);
+                        List<HashMap<String, Object>> list =
+                                gson.fromJson(responseInfo.result, listType);
+                        callback.onSuccess(list);
+                    }
+
+                    @Override
+                    public void onFailure(HttpException error, String msg) {
+
                         callback.onFailure(msg);
                     }
                 });

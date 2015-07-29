@@ -7,6 +7,7 @@
     <color name="whiteDark">#ccffffff</color>
     <color name="whiteAlpha">#44ffffff</color>
     <!-- 灰色 -->
+    <color name="grey">#f0f0f0</color>
     <color name="greyAlpha">#a0a0a0</color>
     <!-- 主颜色 -->
     <color name="colorPrimary">#444</color>

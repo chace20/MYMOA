@@ -13,13 +13,12 @@
         android:theme="@style/ActionBarTheme">
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/NoActionBarTheme"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/NoActionBarTheme">
         </activity>
         <activity
             android:name=".ui.UserLoginActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".ui.UserSelectActivity"
             android:label="@string/app_name"
@@ -53,15 +52,17 @@
             android:name=".ui.PostAddActivity"
             android:label="发布公告"></activity>
         <activity
-            android:name=".ui.MessageReleaseActivity"
-            android:label="发布新消息"></activity>
+            android:name=".ui.MailSendNewActivity"
+            android:label="发送新消息"></activity>
+        <activity
+            android:name=".ui.MailItemContentActivity"
+            android:label="消息内容"></activity>
         <activity
             android:name=".ui.NewsListActivity"
             android:label="新闻列表"></activity>
         <activity
             android:name=".ui.ContactGroupListActivity"
-            android:label="我的群组">
-        </activity>
+            android:label="我的群组"></activity>
         <activity
             android:name=".ui.ContactGroupDetailActivity"
             android:label="群组详情"></activity>

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.uestc.mymoa.R;
 import com.uestc.mymoa.ui.FileManageActivity;
+import com.uestc.mymoa.ui.ProfileActivity;
 
 /**
  * Created by nothisboy on 2015/7/26.
@@ -45,7 +46,7 @@ public class ManageFragment extends Fragment {
         personalCenterLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(getActivity(),));
+                startActivity(new Intent(getActivity(), ProfileActivity.class));
             }
         });
     }

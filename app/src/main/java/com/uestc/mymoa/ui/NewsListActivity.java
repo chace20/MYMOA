@@ -2,6 +2,7 @@ package com.uestc.mymoa.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,14 +28,14 @@ public class NewsListActivity extends BaseActivity {
 
     private List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
     private ListView newsList;
-    private String typeid;
+    private int typeid;
 
     private void getNewsList(){
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("typeid", typeid);
-
+        params.addQueryStringParameter("typeid", typeid+"");
+        Log.e("typeid--","--"+typeid);
         new NewsQueryNewsList().process(params, new IOCallback<HashMap<String, Object>>() {
             @Override
             public void onStart() {
@@ -43,12 +44,9 @@ public class NewsListActivity extends BaseActivity {
 
             @Override
             public void onSuccess(List<HashMap<String, Object>> result) {
-
-                if(!result.get(0).get("code").equals("1")) {
-
+                Log.e("activity result--","--"+result);
                     list = result;
                     refreshAdapter();
-                }
             }
 
             @Override
@@ -74,7 +72,24 @@ public class NewsListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        typeid = intent.getStringExtra("new_category");
+        typeid = intent.getIntExtra("new_category",1);
+
+        switch (typeid){
+            case 1:
+                actionbar.setTitle("娱乐");
+                break;
+            case 2:
+                actionbar.setTitle("军事");
+                break;
+            case 3:
+                actionbar.setTitle("科技");
+                break;
+            case 4:
+                actionbar.setTitle("体育");
+                break;
+        }
+
+
 
         newsList = (ListView)this.findViewById(R.id.newsList);
         newsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,7 +116,7 @@ public class NewsListActivity extends BaseActivity {
 
     @Override
     protected void initValue() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        actionbar.setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

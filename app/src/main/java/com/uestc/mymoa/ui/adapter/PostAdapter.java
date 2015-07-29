@@ -33,11 +33,6 @@ public class PostAdapter extends PagerAdapter {
         this.list = list;
     }
 
-    public PostAdapter(Context context) {
-        this.context = context;
-        getImageList();
-    }
-
     @Override
     public int getCount() {
         return list.size();
@@ -46,23 +41,6 @@ public class PostAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
-    }
-
-    private void getImageList() {
-        list = new ArrayList<>();
-        Map<String, Object> map1 = new HashMap<>();
-        map1.put("imageResId", R.drawable.ic_add_white_24dp);
-        list.add(map1);
-        Map<String, Object> map2 = new HashMap<>();
-        map2.put("imageResId", R.drawable.ic_account_box_white_24dp);
-        list.add(map2);
-        Map<String, Object> map3 = new HashMap<>();
-        map3.put("imageResId", R.drawable.ic_assignment_white_24dp);
-        list.add(map3);
-        Map<String, Object> map4 = new HashMap<>();
-        map4.put("imageResId", R.drawable.ic_widgets_white_24dp);
-        list.add(map4);
-
     }
 
     @Override

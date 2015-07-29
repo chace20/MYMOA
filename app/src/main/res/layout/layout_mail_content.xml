@@ -10,39 +10,39 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="100dp"
+            android:id="@+id/tagMailContentText"
+            android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginLeft="16dp"
             android:gravity="center"
-            android:text="发信人："
-            android:textSize="22sp" />
+            android:text="loading..."
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/fromuidText"
+            android:id="@+id/unameMailContentText"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal">
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black_54" />
 
         <TextView
-            android:layout_width="100dp"
+            android:id="@+id/uidMailContentText"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="时   间："
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/timeText"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black_54" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/timeMailContentText"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/text_black_54" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -51,19 +51,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="内   容："
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/contentMailText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:id="@+id/contentMailContentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_weight="1" />
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black_87"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>

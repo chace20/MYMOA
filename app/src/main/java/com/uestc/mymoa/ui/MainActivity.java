@@ -306,9 +306,9 @@ public class MainActivity extends BaseActivity {
             operationMenu.dismiss();
             isOperationMenuShowed = false;
         } else {
-            Intent intent = new Intent();
-            intent.setAction(BroadCastAction.ACTION_FINISH);
-            sendBroadcast(intent);
+//            Intent intent = new Intent();
+//            intent.setAction(BroadCastAction.ACTION_FINISH);
+//            sendBroadcast(intent);
             super.onBackPressed();
         }
     }

@@ -2,21 +2,16 @@ package com.uestc.mymoa.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
@@ -24,14 +19,10 @@ import com.uestc.mymoa.R;
 import com.uestc.mymoa.io.DocDelDocHanlder;
 import com.uestc.mymoa.io.DocQueryDocListHandler;
 import com.uestc.mymoa.io.IOCallback;
-import com.uestc.mymoa.io.model.DocContent;
 import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 /**
@@ -46,9 +37,6 @@ public class FileManageActivity extends BaseActivity{
     private String file_note_title;
     private List<Map<String,Object>> fileListListmap=new ArrayList<>();
     private BaseAdapter filelistAdapter;
-    private void h(){
-        Log.i("err","bdbdbdbdbdbdb");
-    }
 
     private void resume(){
         RequestParams params=new RequestParams();
@@ -56,13 +44,11 @@ public class FileManageActivity extends BaseActivity{
         new DocQueryDocListHandler().process(params, new IOCallback<Map<String,Object>>() {
             @Override
             public void onStart() {
-h();
             }
 
             @Override
             public void onSuccess(List<Map<String,Object>> result) {
                 fileListListmap=result;
-                Log.i("err",""+"dddddddd");
                 getAdapter(fileListListmap);
                 /**reflash*/
                 reFlash();

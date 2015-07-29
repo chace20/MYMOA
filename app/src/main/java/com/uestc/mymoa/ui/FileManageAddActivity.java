@@ -12,6 +12,7 @@ import com.uestc.mymoa.common.util.ToolUtil;
 import com.uestc.mymoa.constant.Id;
 import com.uestc.mymoa.io.DocAddDocHandler;
 import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.List;
 
@@ -25,9 +26,10 @@ public class FileManageAddActivity extends BaseActivity{
 
     @Override
     protected void initLayout() {
-        btn_cre_save=(Button)findViewById(R.id.file_btn_cre_save);
-        file_add_title=(EditText)findViewById(R.id.file_cre_et_title);
-        file_add_text=(EditText)findViewById(R.id.file_cre_et_text);
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        btn_cre_save=(Button)findViewById(R.id.saveButton);
+        file_add_title=(EditText)findViewById(R.id.titleEdit);
+        file_add_text=(EditText)findViewById(R.id.contentEdit);
 
     }
 
@@ -36,13 +38,11 @@ public class FileManageAddActivity extends BaseActivity{
         btn_cre_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /**
-                 * 保存操作
-                 * **/
-                toSave();
-                Intent intent=new Intent(FileManageAddActivity.this,FileManageActivity.class);
-                startActivity(intent);
+                if(checkInput()){
+                    toSave();
+                }else{
+                    Toast.makeText(FileManageAddActivity.this, "请输入内容", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -54,16 +54,16 @@ public class FileManageAddActivity extends BaseActivity{
 
     @Override
     protected int setRootView() {
-        return 0;
+        return R.layout.layout_filemanage_createnew;
     }
     private void toSave(){
         RequestParams params=new RequestParams();
         final String title=file_add_title.getText().toString();
         String text=file_add_text.getText().toString();
-        params.addQueryStringParameter("title",title);
-        params.addQueryStringParameter("content",text);
-        params.addQueryStringParameter("uid", Id.userId);
-        params.addQueryStringParameter("altertime", ToolUtil.getCurrentTime(ToolUtil.TIME_COMMON));
+        params.addBodyParameter("title", title);
+        params.addBodyParameter("content", text);
+        params.addBodyParameter("uid", Id.userId);
+        params.addBodyParameter("altertime", ToolUtil.getCurrentTime(ToolUtil.TIME_COMMON));
         new DocAddDocHandler().process(params, new IOCallback() {
             @Override
             public void onStart() {
@@ -77,14 +77,29 @@ public class FileManageAddActivity extends BaseActivity{
 
             @Override
             public void onSuccess(Object result) {
-                Toast.makeText(FileManageAddActivity.this, "执行中", Toast.LENGTH_SHORT).show();
-
+                RequestStatus status = (RequestStatus)result;
+                if(status.code==200){
+                    Toast.makeText(FileManageAddActivity.this, "文档已添加", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else{
+                    Toast.makeText(FileManageAddActivity.this, "添加失败", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(String error) {
-
+                Toast.makeText(FileManageAddActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    private boolean checkInput(){
+        String title = file_add_title.getText().toString();
+        String content = file_add_text.getText().toString();
+        if(title == null || content == null || "".equals(title) || "".equals(content)){
+            return false;
+        }
+        return true;
     }
 }

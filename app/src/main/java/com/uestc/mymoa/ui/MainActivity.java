@@ -203,7 +203,7 @@ public class MainActivity extends BaseActivity {
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
-                            startActivity(new Intent(MainActivity.this, MessageReleaseActivity.class));
+                            startActivity(new Intent(MainActivity.this, MailSendNewActivity.class));
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 3:

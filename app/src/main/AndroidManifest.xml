@@ -76,6 +76,9 @@
         <activity
             android:name=".ui.ProfileActivity"
             android:label="个人中心"></activity>
+        <activity
+        android:name=".ui.NewsReleaseActivity"
+        android:label="新闻发布"></activity>
     </application>
 
 

@@ -1,6 +1,5 @@
 package com.uestc.mymoa.ui;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;

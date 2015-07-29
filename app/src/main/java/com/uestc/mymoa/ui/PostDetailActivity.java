@@ -23,7 +23,7 @@ public class PostDetailActivity extends Activity {
         title=(TextView)findViewById(R.id.title);
         date=(TextView)findViewById(R.id.date);
         article=(TextView)findViewById(R.id.article);
-        title.
+//        title.
     }
 
     protected void onResume(){

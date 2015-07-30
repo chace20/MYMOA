@@ -79,6 +79,7 @@ public class ProfileActivity extends BaseActivity{
 
                 UserUtil.setUserId(ProfileActivity.this, "-1");
                 UserUtil.setLoginState(ProfileActivity.this, false);
+                Toast.makeText(ProfileActivity.this, "注销成功", Toast.LENGTH_SHORT).show();
             }
         });
         getContactDetail();

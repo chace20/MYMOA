@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/myGroupLinear"
         android:layout_width="fill_parent"
-        android:layout_height="48dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:gravity="center_vertical"
         android:layout_marginTop="16dp"
@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="16dp"
             android:text="我的群组"
             android:textSize="16sp"
             android:textColor="@color/text_black_87"

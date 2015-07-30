@@ -40,13 +40,14 @@ public class MailSendNewActivity extends BaseActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (touidEdit.getText().length()!=11){
-                    Toast.makeText(MailSendNewActivity.this,"要输入11位的电话号码哟！",Toast.LENGTH_SHORT).show();
-                }else if (contentMailEdit.getText().length()==0){
-                    Toast.makeText(MailSendNewActivity.this,"信息要有内容哟！",Toast.LENGTH_SHORT).show();
-                }else {
-                sendMail();
-            }}
+                if (touidEdit.getText().length() != 11) {
+                    Toast.makeText(MailSendNewActivity.this, "要输入11位的电话号码哟！", Toast.LENGTH_SHORT).show();
+                } else if (contentMailEdit.getText().length() == 0) {
+                    Toast.makeText(MailSendNewActivity.this, "信息要有内容哟！", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendMail();
+                }
+            }
         });
     }
 
@@ -82,7 +83,7 @@ public class MailSendNewActivity extends BaseActivity {
             public void onSuccess(Object result) {
 
                 if (((RequestStatus)result).code == 200) {
-                    Toast.makeText(MailSendNewActivity.this,"发送成功啦",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MailSendNewActivity.this,"发送成功",Toast.LENGTH_SHORT).show();
                     Timer timer = new Timer();
                     TimerTask task = new TimerTask() {
                         @Override
@@ -91,6 +92,8 @@ public class MailSendNewActivity extends BaseActivity {
                         }
                     };
                     timer.schedule(task, 500);
+                }else{
+                    Toast.makeText(MailSendNewActivity.this,"发送失败",Toast.LENGTH_SHORT).show();
                 }
             }
 

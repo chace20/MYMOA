@@ -9,7 +9,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_mymoa"
         android:label="@string/app_name"
         android:theme="@style/ActionBarTheme">
         <activity
@@ -62,13 +62,10 @@
             android:label="消息内容"></activity>
         <activity
             android:name=".ui.NewsReleaseActivity"
-            android:label="发布新消息"></activity>
+            android:label="发布新闻"></activity>
         <activity
             android:name=".ui.NewsListActivity"
             android:label="新闻列表"></activity>
-        <activity
-            android:name=".ui.NewsReleaseActivity"
-            android:label="发布新闻"></activity>
         <activity
             android:name=".ui.ContactGroupListActivity"
             android:label="我的群组"></activity>

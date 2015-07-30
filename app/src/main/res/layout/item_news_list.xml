@@ -7,7 +7,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="16sp"
-            android:paddingLeft="24dp"
+            android:paddingLeft="16dp"
             android:gravity="center_vertical"
             android:textColor="@color/text_black_54"
             android:id="@+id/newsAuthorText"/>

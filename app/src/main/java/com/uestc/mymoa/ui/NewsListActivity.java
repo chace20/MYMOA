@@ -72,7 +72,7 @@ public class NewsListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        typeid = intent.getIntExtra("new_category",1);
+        typeid = intent.getIntExtra("news_category",1);
 
         switch (typeid){
             case 1:

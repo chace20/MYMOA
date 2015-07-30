@@ -122,7 +122,6 @@ public class MainActivity extends BaseActivity {
         homeLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_HOME, true);
             }
         });
@@ -130,7 +129,6 @@ public class MainActivity extends BaseActivity {
         messageLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "message", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_MESSAGE, true);
             }
         });
@@ -138,7 +136,6 @@ public class MainActivity extends BaseActivity {
         contactLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "contact", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_CONTACT, true);
             }
         });
@@ -146,7 +143,6 @@ public class MainActivity extends BaseActivity {
         manageLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "manage", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_MANAGE, true);
             }
         });
@@ -201,11 +197,9 @@ public class MainActivity extends BaseActivity {
                             break;
                         case 1:
                             startActivityForResult(new Intent(MainActivity.this, NewsReleaseActivity.class), 1);
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 2:
                             startActivity(new Intent(MainActivity.this, MailSendNewActivity.class));
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                     }
                     operationMenu.dismiss();

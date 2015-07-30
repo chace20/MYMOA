@@ -84,16 +84,13 @@ public class NewsReleaseActivity extends BaseActivity {
         newsReleaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addNews();
                 finish();
             }
         });
-
         newsReleaseCategorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 typeid = String.valueOf((position + 1));
             }
         });

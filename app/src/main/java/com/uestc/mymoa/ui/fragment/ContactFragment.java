@@ -3,7 +3,6 @@ package com.uestc.mymoa.ui.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
 import com.uestc.mymoa.io.ContactHandler;
 import com.uestc.mymoa.io.IOCallback;
@@ -22,7 +20,6 @@ import com.uestc.mymoa.ui.ContactGroupListActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * Created by nothisboy on 2015/7/26.

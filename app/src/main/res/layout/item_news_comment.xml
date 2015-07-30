@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:layout_gravity="center_horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/selector_item_news_category">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
         <TextView
+            android:id="@+id/newsCommentAuthorText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:textSize="20sp"
-            android:paddingLeft="16dp"
             android:gravity="center_vertical"
-            android:textColor="@color/text_black_87"
-            android:id="@+id/newsCommentAuthorText"/>
+            android:paddingLeft="16dp"
+            android:textColor="@color/text_black_54"
+            android:textSize="14sp" />
         <TextView
+            android:id="@+id/newsCommentContentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="18sp"
             android:paddingLeft="16dp"
             android:textColor="@color/text_black_87"
-            android:id="@+id/newsCommentContentText"/>
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

@@ -6,23 +6,21 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="56dp"
-        android:padding="8dp"
-        android:orientation="horizontal">
+        android:padding="8dp">
         <EditText
             android:id="@+id/file_sea_et_word"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_alignParentLeft="true"
+            android:layout_height="match_parent"
             android:layout_toLeftOf="@+id/file_btn_sea_search"
             android:layout_marginRight="16dp" />
         <Button
             android:id="@+id/file_btn_sea_search"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:text="搜索"
             style="@style/buttonPrimary"
             android:gravity="center"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <ListView
         android:id="@+id/lv_filemanage_searchfile"

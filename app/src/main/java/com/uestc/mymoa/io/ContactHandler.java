@@ -1,7 +1,5 @@
 package com.uestc.mymoa.io;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
@@ -106,7 +104,6 @@ public class ContactHandler extends IOHandler{
                     @Override
                     public void onStart() {
                         super.onStart();
-                        Log.e("null", "start");
                     }
 
                     @Override
@@ -114,7 +111,6 @@ public class ContactHandler extends IOHandler{
                         Type mapType = new TypeToken<HashMap<String, Object>>() {
                         }.getType();
                         Gson gson = new Gson();
-                        Log.e("null", "res:"+responseInfo.result);
                         HashMap < String, Object > map =
                                 gson.fromJson(responseInfo.result, mapType);
                         callback.onSuccess(map);
@@ -124,7 +120,6 @@ public class ContactHandler extends IOHandler{
                     public void onFailure(HttpException error, String msg) {
 
                         callback.onFailure(msg);
-                        Log.e("null", "failed");
                     }
                 });
     }
@@ -246,7 +241,6 @@ public class ContactHandler extends IOHandler{
                         Type listType = new TypeToken<List<HashMap<String, Object>>>() {
                         }.getType();
                         Gson gson = new Gson();
-                        Log.e("null", "res:"+responseInfo.result);
                         List<HashMap<String, Object>> list =
                                 gson.fromJson(responseInfo.result, listType);
                         callback.onSuccess(list);

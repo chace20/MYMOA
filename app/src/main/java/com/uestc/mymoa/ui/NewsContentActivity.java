@@ -1,20 +1,24 @@
 package com.uestc.mymoa.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
-import com.uestc.mymoa.io.ContactHandler;
+import com.uestc.mymoa.common.view.InputDialog;
+import com.uestc.mymoa.constant.Id;
 import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.NewsAddCommentHandler;
 import com.uestc.mymoa.io.NewsQueryCommentListHandler;
 import com.uestc.mymoa.io.NewsQueryNewsContent;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,14 +59,11 @@ public class NewsContentActivity extends BaseActivity {
 
             @Override
             public void onSuccess(HashMap<String, Object> result) {
-                if(!result.get("code").equals("1")) {
-
                     map = result;
 
                     newsContentTitleText.setText(map.get("title").toString());
                     newsContentAuthorText.setText(map.get("uname").toString());
                     newsContentNewsText.setText(map.get("content").toString());
-                }
             }
 
             @Override
@@ -79,11 +80,8 @@ public class NewsContentActivity extends BaseActivity {
 
             @Override
             public void onSuccess(List<HashMap<String, Object>> result) {
-                if(!result.get(0).get("code").equals("1")) {
-
                     list = result;
                     refreshAdapter();
-                }
             }
 
             @Override
@@ -101,7 +99,7 @@ public class NewsContentActivity extends BaseActivity {
     private void refreshAdapter(){
         newsCommentList.setAdapter(new SimpleAdapter(NewsContentActivity.this,
                 list, R.layout.item_news_comment,
-                new String[]{"uanme", "content"},
+                new String[]{"uname", "content"},
                 new int[]{R.id.newsCommentAuthorText, R.id.newsCommentContentText}));
     }
 
@@ -136,7 +134,74 @@ public class NewsContentActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_news_comment, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_comment){
+            final InputDialog inputDialog = new InputDialog(NewsContentActivity.this);
+            inputDialog.setInputEditHint("输入评论");
+            inputDialog.buider
+                    .setTitle("评论")
+                    .setPositiveButton("发送", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String comment = inputDialog.getInputEditText();
+                            if(comment==null||"".equals(comment)){
+                                Toast.makeText(NewsContentActivity.this,"请输入内容",Toast.LENGTH_SHORT).show();
+                            }else{
+                                addComment(comment);
+                            }
+                        }
+                    })
+                    .setNegativeButton("取消", null)
+                    .show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected int setRootView() {
         return R.layout.layout_news_content;
+    }
+
+    private void addComment(String comment){
+
+        RequestParams params = new RequestParams();
+
+        params.addBodyParameter("newsid", newsid);
+        params.addBodyParameter("uid", Id.userId);
+        params.addBodyParameter("content", comment);
+
+        new NewsAddCommentHandler().process(params, new IOCallback() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(List result) {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                RequestStatus status = (RequestStatus)result;
+                if(status.code==200){
+                    Toast.makeText(NewsContentActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
+                    getNewsContentAndComment();
+                }else{
+                    Toast.makeText(NewsContentActivity.this,"评论失败",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(NewsContentActivity.this,"网络错误."+error,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

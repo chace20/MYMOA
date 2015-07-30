@@ -24,7 +24,7 @@ public class DocQueryDocContentHandler extends IOHandler {
     public void process(RequestParams params, IOCallback ioCallback) {
         this.callback = ioCallback;
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.GET, Api.Doc.queryDocContent, new RequestCallBack<String>() {
+        http.send(HttpRequest.HttpMethod.GET, Api.Doc.queryDocContent, params,new RequestCallBack<String>() {
 
             @Override
             public void onStart() {
@@ -34,7 +34,6 @@ public class DocQueryDocContentHandler extends IOHandler {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 Gson gson = new Gson();
-                Log.e("handler result--", responseInfo.result);
                 DocContent docContent = gson.fromJson(responseInfo.result, DocContent.class);
                 callback.onSuccess(docContent);
             }

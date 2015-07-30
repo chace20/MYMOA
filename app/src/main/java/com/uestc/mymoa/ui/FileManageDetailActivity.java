@@ -1,20 +1,15 @@
 package com.uestc.mymoa.ui;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
 import com.uestc.mymoa.io.DocQueryDocContentHandler;
 import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.DocContent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +28,7 @@ public class FileManageDetailActivity extends BaseActivity{
     private String text;
     @Override
     protected void initLayout() {
+        actionbar.setDisplayHomeAsUpEnabled(true);
         uname=(TextView)findViewById(R.id.file_det_tv_author);
         time=(TextView)findViewById(R.id.file_det_tv_time);
         content=(TextView)findViewById(R.id.file_det_tv_text);
@@ -76,25 +72,26 @@ public class FileManageDetailActivity extends BaseActivity{
         RequestParams params=new RequestParams();
         params.addQueryStringParameter("docid",""+docid);
 
-        new DocQueryDocContentHandler().process(params, new IOCallback<Map<String,Object>>() {
+        new DocQueryDocContentHandler().process(params, new IOCallback() {
             @Override
             public void onStart() {
 
             }
 
             @Override
-            public void onSuccess(List<Map<String,Object>> result) {
+            public void onSuccess(List result) {
 
 
             }
 
             @Override
-            public void onSuccess(Map<String,Object> result) {
-                Log.e("activity result--","--"+result.get("uname"));
-                uname.setText(result.get("uname").toString());
-                content.setText(result.get("content").toString());
-                time.setText(result.get("altertime").toString());
-                text=result.get("content").toString();
+            public void onSuccess(Object result) {
+                DocContent doc = (DocContent)result;
+                actionbar.setTitle(doc.title);
+                uname.setText(doc.uname);
+                content.setText(doc.content);
+                time.setText(doc.altertime);
+                text=doc.content;
             }
 
             @Override

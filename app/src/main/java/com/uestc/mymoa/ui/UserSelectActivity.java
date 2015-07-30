@@ -59,9 +59,9 @@ public class UserSelectActivity extends BaseActivity {
 
     @Override
     protected void initValue() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BroadCastAction.ACTION_FINISH);
-        registerReceiver(receiver,filter);
+//        IntentFilter filter = new IntentFilter();
+//        filter.addAction(BroadCastAction.ACTION_FINISH);
+//        registerReceiver(receiver,filter);
     }
 
     @Override
@@ -69,17 +69,17 @@ public class UserSelectActivity extends BaseActivity {
         return R.layout.layout_user_select;
     }
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            unregisterReceiver(receiver);
-            finish();
-        }
-    };
+//    BroadcastReceiver receiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            unregisterReceiver(receiver);
+//            finish();
+//        }
+//    };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(receiver);
+//        unregisterReceiver(receiver);
     }
 }

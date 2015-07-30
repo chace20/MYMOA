@@ -1,6 +1,7 @@
 package com.uestc.mymoa.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -57,6 +58,7 @@ public class NewsReleaseActivity extends BaseActivity {
                 if (result.code == 200) {
                     Toast.makeText(NewsReleaseActivity.this, "发布新闻成功",
                             Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(NewsReleaseActivity.this, "发布新闻失败",
                             Toast.LENGTH_SHORT).show();
@@ -65,6 +67,8 @@ public class NewsReleaseActivity extends BaseActivity {
 
             @Override
             public void onFailure(String error) {
+                Toast.makeText(NewsReleaseActivity.this, "发布新闻失败",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -85,13 +89,20 @@ public class NewsReleaseActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 addNews();
-                finish();
             }
         });
-        newsReleaseCategorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        newsReleaseCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("select", "typeid--" + position + 1);
                 typeid = String.valueOf((position + 1));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                newsReleaseCategorySpinner.setSelection(0);
+                typeid = String.valueOf(1);
             }
         });
     }

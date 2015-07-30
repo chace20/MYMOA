@@ -2,17 +2,13 @@ package com.uestc.mymoa.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
-import com.uestc.mymoa.io.ContactHandler;
 import com.uestc.mymoa.io.IOCallback;
 import com.uestc.mymoa.io.NewsQueryNewsList;
 
@@ -34,8 +30,7 @@ public class NewsListActivity extends BaseActivity {
 
         RequestParams params = new RequestParams();
 
-        params.addQueryStringParameter("typeid", typeid+"");
-        Log.e("typeid--","--"+typeid);
+        params.addQueryStringParameter("typeid", typeid + "");
         new NewsQueryNewsList().process(params, new IOCallback<HashMap<String, Object>>() {
             @Override
             public void onStart() {
@@ -44,7 +39,6 @@ public class NewsListActivity extends BaseActivity {
 
             @Override
             public void onSuccess(List<HashMap<String, Object>> result) {
-                Log.e("activity result--","--"+result);
                     list = result;
                     refreshAdapter();
             }

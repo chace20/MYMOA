@@ -88,7 +88,6 @@ public class NewsReleaseActivity extends BaseActivity {
         newsReleaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addNews();
             }
         });
@@ -96,7 +95,7 @@ public class NewsReleaseActivity extends BaseActivity {
         newsReleaseCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("select","typeid--"+position+1);
+                Log.e("select", "typeid--" + position + 1);
                 typeid = String.valueOf((position + 1));
             }
 

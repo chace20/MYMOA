@@ -1,32 +1,81 @@
 package com.uestc.mymoa.ui;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.content.Intent;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.uestc.mymoa.R;
+import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.PostQueryPostContentHandler;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
- * Created by HeGang on 2015/7/29.
+ * Created by nothisboy on 2015/7/29.
  */
-public class PostDetailActivity extends Activity {
-    private TextView title;
-    private TextView date;
-    private TextView article;
+public class PostDetailActivity extends BaseActivity {
 
+    private TextView postTitleText;
+    private TextView postUnameText;
+    private TextView postTimeText;
+    private TextView postContentText;
 
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_details);
-        title=(TextView)findViewById(R.id.title);
-        date=(TextView)findViewById(R.id.date);
-        article=(TextView)findViewById(R.id.article);
-//        title.
+    @Override
+    protected void initLayout() {
+        postTitleText = (TextView) findViewById(R.id.postTitleText);
+        postUnameText = (TextView) findViewById(R.id.postUnameText);
+        postTimeText = (TextView) findViewById(R.id.postTimeText);
+        postContentText = (TextView) findViewById(R.id.postContentText);
     }
 
-    protected void onResume(){
-        HashMap<String,Object> map =new HashMap<>();
+    @Override
+    protected void initListener() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void initValue() {
+        getData();
+    }
+
+    @Override
+    protected int setRootView() {
+        return R.layout.layout_post_content;
+    }
+
+    private void getData() {
+        Intent intent = getIntent();
+        RequestParams params = new RequestParams();
+        params.addQueryStringParameter("postid", intent.getStringExtra("postid"));
+        new PostQueryPostContentHandler().process(params, new IOCallback() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess(List result) {
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                HashMap<String, String> map = (HashMap<String, String>) result;
+                if (map.get("code") != null) {
+                    Toast.makeText(PostDetailActivity.this,
+                            "由于某种原因，没有找到公告", Toast.LENGTH_SHORT).show();
+                } else {
+                    postTitleText.setText(map.get("title"));
+                    postUnameText.setText(map.get("uname"));
+                    postTimeText.setText(map.get("endtime"));
+                    postContentText.setText(map.get("contemt"));
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
     }
 }

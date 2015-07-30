@@ -103,7 +103,7 @@ public class NewsContentActivity extends BaseActivity {
     private void refreshAdapter(){
         newsCommentList.setAdapter(new SimpleAdapter(NewsContentActivity.this,
                 list, R.layout.item_news_comment,
-                new String[]{"uanme", "content"},
+                new String[]{"uname", "content"},
                 new int[]{R.id.newsCommentAuthorText, R.id.newsCommentContentText}));
     }
 

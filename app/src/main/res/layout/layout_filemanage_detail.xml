@@ -3,61 +3,61 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:padding="16dp"
     android:weightSum="1">
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="author:"
-            android:textSize="26sp"
-            android:gravity="center"
+            android:text="作者："
+            android:textSize="14sp"
+            android:textColor="@color/text_black_54"
+            android:gravity="center_vertical"
             />
         <TextView
             android:id="@+id/file_det_tv_author"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="3"
+            android:textColor="@color/text_black_54"
             android:text=""
 
             />
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingBottom="16dp"
         >
         <TextView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="time:"
-            android:textSize="26sp"
-            android:gravity="center"
+            android:text="修改时间："
+            android:textSize="14sp"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black_54"
             />
         <TextView
             android:id="@+id/file_det_tv_time"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="3"
+            android:textColor="@color/text_black_54"
             />
     </LinearLayout>
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:text="detail:"
-        android:textSize="30sp"
-        android:gravity="left"
-        />
     <TextView
         android:id="@+id/file_det_tv_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text=""
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/text_black_87"
          />
 </LinearLayout>

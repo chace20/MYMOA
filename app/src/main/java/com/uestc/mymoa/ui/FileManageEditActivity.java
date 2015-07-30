@@ -12,6 +12,7 @@ import com.uestc.mymoa.R;
 import com.uestc.mymoa.common.util.ToolUtil;
 import com.uestc.mymoa.io.DocEditDocHandler;
 import com.uestc.mymoa.io.IOCallback;
+import com.uestc.mymoa.io.model.RequestStatus;
 
 import java.util.List;
 
@@ -21,15 +22,15 @@ import java.util.List;
 public class FileManageEditActivity extends BaseActivity{
     private String file_edit_text;
     private int file_id;
-    private EditText mycontent=(EditText)findViewById(R.id.file_edi_et_text);
-    private Button edit_btn=(Button)findViewById(R.id.file_btn_edi_save);
-    private EditText ediContent=(EditText)findViewById(R.id.file_edi_et_text);
+    private EditText mycontent;
+    private Button edit_btn;
+    private EditText ediContent;
     @Override
     protected void initLayout() {
-/***/
-        file_edit_text=getIntent().getStringExtra("content");
-        file_id=getIntent().getIntExtra("docid", 0);
-        mycontent.setText(file_edit_text);
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        mycontent=(EditText)findViewById(R.id.file_edi_et_text);
+        edit_btn=(Button)findViewById(R.id.file_btn_edi_save);
+        ediContent=(EditText)findViewById(R.id.file_edi_et_text);
     }
 
     @Override
@@ -37,21 +38,25 @@ public class FileManageEditActivity extends BaseActivity{
         edit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toSave();
-                Intent intent = new Intent(FileManageEditActivity.this, FileManageActivity.class);
-                startActivity(intent);
+                if(checkInput()){
+                    toSave();
+                }else{
+                    Toast.makeText(FileManageEditActivity.this, "内容没有改变", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     @Override
     protected void initValue() {
-
+        file_edit_text=getIntent().getStringExtra("content");
+        file_id=getIntent().getIntExtra("docid", 0);
+        mycontent.setText(file_edit_text);
     }
 
     @Override
     protected int setRootView() {
-        return 0;
+        return R.layout.layout_filemanage_edit;
     }
     public static Intent editIntent(Context context,int text_id,String content){
         Intent intent=new Intent();
@@ -71,8 +76,8 @@ public class FileManageEditActivity extends BaseActivity{
         String editTime= ToolUtil.getCurrentTime(ToolUtil.TIME_COMMON);
 
         params.addBodyParameter("docid",""+editid);
-        params.addBodyParameter("content",editcontent);
-        params.addBodyParameter("altertime",editTime);
+        params.addBodyParameter("content", editcontent);
+        params.addBodyParameter("altertime", editTime);
 
         new DocEditDocHandler().process(params, new IOCallback() {
             @Override
@@ -87,13 +92,27 @@ public class FileManageEditActivity extends BaseActivity{
 
             @Override
             public void onSuccess(Object result) {
-                Toast.makeText(FileManageEditActivity.this, "执行中", Toast.LENGTH_SHORT).show();
+                RequestStatus status = (RequestStatus) result;
+                if (status.code == 200) {
+                    Toast.makeText(FileManageEditActivity.this, "文档已修改", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(FileManageEditActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(String error) {
-
+                Toast.makeText(FileManageEditActivity.this, "网络错误", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean checkInput(){
+        String content=ediContent.getText().toString();
+        if(content.equals(file_edit_text)){
+            return false;
+        }
+        return true;
     }
 }

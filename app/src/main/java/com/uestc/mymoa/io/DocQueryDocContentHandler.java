@@ -1,5 +1,7 @@
 package com.uestc.mymoa.io;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -22,7 +24,7 @@ public class DocQueryDocContentHandler extends IOHandler {
     public void process(RequestParams params, IOCallback ioCallback) {
         this.callback = ioCallback;
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.GET, Api.Doc.queryDocContent, new RequestCallBack<String>() {
+        http.send(HttpRequest.HttpMethod.GET, Api.Doc.queryDocContent, params,new RequestCallBack<String>() {
 
             @Override
             public void onStart() {

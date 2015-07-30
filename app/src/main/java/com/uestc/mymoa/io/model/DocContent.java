@@ -8,6 +8,6 @@ public class DocContent {
     public String docid;
     public String uname;
     public String title;
-    public String Content;
+    public String content;
     public String altertime;
 }

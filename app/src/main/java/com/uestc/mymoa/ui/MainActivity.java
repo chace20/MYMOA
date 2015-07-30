@@ -122,7 +122,6 @@ public class MainActivity extends BaseActivity {
         homeLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_HOME, true);
             }
         });
@@ -130,7 +129,6 @@ public class MainActivity extends BaseActivity {
         messageLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "message", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_MESSAGE, true);
             }
         });
@@ -138,7 +136,6 @@ public class MainActivity extends BaseActivity {
         contactLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "contact", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_CONTACT, true);
             }
         });
@@ -146,7 +143,6 @@ public class MainActivity extends BaseActivity {
         manageLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "manage", Toast.LENGTH_SHORT).show();
                 viewpager.setCurrentItem(CURRENT_IS_MANAGE, true);
             }
         });
@@ -179,12 +175,12 @@ public class MainActivity extends BaseActivity {
 
         if (!isOperationMenuShowed) {
 
-            operationMenu = new PopupWindow(view, getWindow().getDecorView().getWidth() / 3, ViewGroup.LayoutParams.WRAP_CONTENT);
+            operationMenu = new PopupWindow(view, getWindow().getDecorView().getWidth() * 1 / 2, ViewGroup.LayoutParams.WRAP_CONTENT);
             operationMenu.setAnimationStyle(R.style.popWindowAnimation);
             Rect frame = new Rect();
             getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
             int statusBarHeight = frame.top;
-            operationMenu.showAtLocation(viewpager, Gravity.NO_GRAVITY, getWindow().getDecorView().getWidth(), toolbar.getHeight() + statusBarHeight);
+            operationMenu.showAtLocation(viewpager, Gravity.NO_GRAVITY, getWindow().getDecorView().getWidth() * 15 / 32, toolbar.getHeight() + statusBarHeight);
 
             isOperationMenuShowed = true;
 
@@ -200,14 +196,10 @@ public class MainActivity extends BaseActivity {
                             startActivity(new Intent(MainActivity.this, PostAddActivity.class));
                             break;
                         case 1:
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
+                            startActivityForResult(new Intent(MainActivity.this, NewsReleaseActivity.class), 1);
                             break;
                         case 2:
-                            startActivity(new Intent(MainActivity.this, MessageReleaseActivity.class));
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
-                            break;
-                        case 3:
-                            Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, MailSendNewActivity.class));
                             break;
                     }
                     operationMenu.dismiss();
@@ -225,7 +217,6 @@ public class MainActivity extends BaseActivity {
         list.add("发布公告");
         list.add("发布新闻");
         list.add("发送消息");
-        list.add("新建联系人");
 
         for (int i = 0; i < list.size(); i++) {
             Map<String, Object> map = new HashMap<>();
@@ -307,9 +298,9 @@ public class MainActivity extends BaseActivity {
             operationMenu.dismiss();
             isOperationMenuShowed = false;
         } else {
-            Intent intent = new Intent();
-            intent.setAction(BroadCastAction.ACTION_FINISH);
-            sendBroadcast(intent);
+//            Intent intent = new Intent();
+//            intent.setAction(BroadCastAction.ACTION_FINISH);
+//            sendBroadcast(intent);
             super.onBackPressed();
         }
     }

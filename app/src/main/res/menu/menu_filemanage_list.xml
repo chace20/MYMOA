@@ -6,12 +6,12 @@
     >
 <item android:id="@+id/action_search"
     android:title="@string/app_name"
-    android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+    android:icon="@drawable/ic_search"
     app:showAsAction="always"
     />
     <item android:id="@+id/action_addnew"
         android:title="@string/app_name"
-        android:icon="@drawable/abc_textfield_search_activated_mtrl_alpha"
+        android:icon="@drawable/ic_add_white_24dp"
         app:showAsAction="always"
         />
 

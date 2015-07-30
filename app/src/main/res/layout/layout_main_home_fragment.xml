@@ -77,7 +77,8 @@
     <GridView
         android:id="@+id/newsCategoryGrid"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:clickable="true"
         android:horizontalSpacing="1dp"
         android:numColumns="3"

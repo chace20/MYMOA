@@ -200,7 +200,7 @@ public class MainActivity extends BaseActivity {
                             startActivity(new Intent(MainActivity.this, PostAddActivity.class));
                             break;
                         case 1:
-                            startActivity(new Intent(MainActivity.this, NewsReleaseActivity.class));
+                            startActivityForResult(new Intent(MainActivity.this, NewsReleaseActivity.class), 1);
                             Toast.makeText(MainActivity.this, (CharSequence) getOperations().get(position).get("operation"), Toast.LENGTH_SHORT).show();
                             break;
                         case 2:

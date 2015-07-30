@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
@@ -32,6 +33,7 @@ public class PostAddActivity extends BaseActivity {
     private Button btnStart;
     private Button btnFinal;
     private Button btnIssus;
+    private LinearLayout postContentLinear;
 
     private static final int DATE_DIALOG_ID = 1;
     private static final int SHOW_DATAPICK = 0;
@@ -55,6 +57,7 @@ public class PostAddActivity extends BaseActivity {
         btnStart = (Button) findViewById(R.id.startDateButton);
         btnFinal = (Button) findViewById(R.id.endDateButton);
         btnIssus = (Button) findViewById(R.id.postReleaseButton);
+        postContentLinear = (LinearLayout) findViewById(R.id.postContentLinear);
     }
 
     @Override
@@ -95,6 +98,13 @@ public class PostAddActivity extends BaseActivity {
 
             }
 
+        });
+        postContentLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etArticle.requestFocus();
+                etArticle.setActivated(true);
+            }
         });
     }
 
@@ -137,7 +147,7 @@ public class PostAddActivity extends BaseActivity {
                             finish();
                         }
                     };
-                    timer.schedule(task,500);
+                    timer.schedule(task, 500);
                 } else {
                     Toast.makeText(PostAddActivity.this, "由于服务器某种原因，发布失败啦~", Toast.LENGTH_SHORT).show();
                 }

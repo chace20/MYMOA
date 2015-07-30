@@ -71,7 +71,6 @@ public class MailSendNewActivity extends BaseActivity {
         handler.process(params, new IOCallback() {
             @Override
             public void onStart() {
-                Toast.makeText(MailSendNewActivity.this,"start！",Toast.LENGTH_SHORT).show();
             }
 
             @Override

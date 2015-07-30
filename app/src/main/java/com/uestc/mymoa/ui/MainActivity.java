@@ -312,8 +312,8 @@ public class MainActivity extends BaseActivity {
             isOperationMenuShowed = false;
             return isOperationMenuShowed;
         } else {
-
-            return super.dispatchTouchEvent(ev);
+            super.dispatchTouchEvent(ev);
+            return true;
         }
     }
 
